@@ -1,0 +1,74 @@
+:root {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 16px;
+  --bg: url("https://www.mtgcardmaker.com/mcmaker/createcard.jpg");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  font-size: 1.5rem;
+  padding: 2rem;
+
+  input,
+  button {
+    font-size: 1.5rem;
+  }
+}
+
+#cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  font-size: 20px;
+  width: 28rem;
+  height: 40rem;
+  position: relative;
+
+  .bg {
+    position: absolute;
+    width: 100%;
+    z-index: -10;
+  }
+}
+
+.content {
+  padding: 2.75rem;
+  height: 100%;
+
+  strong:first-child {
+    display: block;
+    margin-top: -8px;
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  & > *:first-child > em:first-of-type {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  em + span {
+    font-size: 1.1em;
+    font-weight: bold !important;
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  h2 {
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+}
