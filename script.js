@@ -2,10 +2,6 @@ document.querySelector("button").onclick = downloadAllCards;
 
 // to html https://text-html.com/
 
-const cardInfo = {
-  bgSrc: "https://www.mtgcardmaker.com/mcmaker/createcard.jpg",
-};
-
 // regex filters to separate content out of god-awful formatting
 const filters = {
   removeQuantities: /\(x[0-9]\)(?=[\s\S]*<strong>.*:)/gm,
@@ -14,15 +10,19 @@ const filters = {
   title: /<p><strong>.*<\/strong>/g,
   flavor: /(?:strong>)<em>.*<\/em>/g,
   types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
-  passFail: /(Pass|Failure|Partial Success|Partial|Fail)/g,
+  passFail: /(Pass|Failure|Partial Success|Partial|Fail)[.,-]?/g,
   conditions:
     /(?<=\>( ?|Activate.*))(Revealer Choice|Council Vote|Regent Choice)[:.-]?/g,
   options:
-    /(?<=(Revealer Choice|Council Vote|Regent Choice)[\s\S]*)&ldquo;.{3,50}&rdquo; ?(?!<)/g,
+    /(?<=(Revealer Choice|Council Vote|Regent Choice)[\s\S]*)&ldquo;.{3,50}&rdquo;(?! ([aA]ction|[cC]ard))/g,
   fuckColons: /:/g,
   fuckSpaces: /(<p>&nbsp;<\/p>|&nbsp;)/g,
-  checks: /([0-9]+) .*(Test|Check)/g,
-  ifs: /(?<=IF[\s\S]*)IF/g,
+  damage: /Damage!/g,
+  checks: /([0-9]+) .{0,60}(Test|Check)/g,
+  ifs: /IF .{5,50}:/g,
+  if2: /(?<=IF[\s\S]*)IF/g,
+  ritualTier: /(?<=Tier [0-8]) ritual/g,
+  activate: /Activate [\w ,]{9,60}\./,
 };
 
 // Apply useful filters and return an array of each card's innerHTML
@@ -30,12 +30,16 @@ function applyFilters(str = "") {
   // Adds useful tags to keywords
   const newStr = str
     .replace(filters.removeQuantities, "")
+    .replace(filters.ifs, "<b class='unfuck-colons'>$&</b>")
+    .replace(filters.if2, "<br><br>$&")
+    .replace(filters.ritualTier, "<label class='ritual word padder'>$&</label>")
     .replace(filters.fuckColons, "")
     .replace(filters.fuckSpaces, "")
-    .replace(filters.ifs, "<br><br>$&")
-    .replace(filters.types, "<label class='type $&'>$&</label>")
-    .replace(filters.passFail, "<b>$&</b>")
+    .replace(filters.damage, "<b>$&</b>")
+    .replace(filters.passFail, "<b class='success unfuck-colons'>$1</b>")
     .replace(filters.options, "<b class='quotes'>$&</b>")
+    .replace(filters.types, "<label class='type $&'>$&</label>")
+    .replace(filters.activate, "<label class='activate'>$&</label>")
     .replace(filters.conditions, "<label class='condition'>$&</label>")
     .replace(filters.checks, "<label class='check' data-diff='$1'>$&</label>")
     .replace(filters.startOfCard, "!!BREAK$&");
@@ -94,7 +98,8 @@ async function addNodeToZip(domNode, name, zip) {
 function downloadAllCards() {
   const name = document.getElementById("name").value;
   const zip = new JSZip();
-  const zipArr = [...document.querySelectorAll(".card")].map((node, index) =>
+  const allCards = [...document.querySelectorAll(".card")];
+  const zipArr = allCards.map((node, index) =>
     addNodeToZip(node, name + index, zip)
   );
 

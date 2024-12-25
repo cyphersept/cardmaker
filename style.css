@@ -1,8 +1,18 @@
+@font-face {
+  font-family: Rosarivo;
+  src: url(Rosarivo/Rosarivo-Regular.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: Rosarivo;
+  src: url(Rosarivo/Rosarivo-Italic.ttf) format("truetype");
+  font-style: italic;
+}
+
 :root {
   font-family: "Rosarivo", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 16px;
-  --bg: url("https://www.mtgcardmaker.com/mcmaker/createcard.jpg");
   color: rgb(30, 29, 28);
 
   --ink-red: hsl(10, 66%, 40%);
@@ -117,10 +127,12 @@ header {
   &::before {
     content: attr(data-diff) !important;
     font-weight: bold;
-    transform: translateY(1.3rem);
+    transform: translateY(1.9rem);
     font-size: 3rem;
     text-align: center;
     vertical-align: middle;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
 }
 
@@ -174,4 +186,13 @@ label.Magic {
     content: "–";
     font-weight: normal;
   }
+}
+
+.success::before {
+  display: block;
+}
+
+.unfuck-colons::after {
+  display: inline;
+  content: ":";
 }
