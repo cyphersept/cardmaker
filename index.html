@@ -8,6 +8,12 @@
     <script src="libs/dom-to-image.js"></script>
     <script src="libs/FileSaver.min.js"></script>
     <script src="libs/jszip.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Rosarivo:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -17,117 +23,8 @@
       </label>
       <button type="button">Download all</button>
     </header>
-    <div id="cards">
-      <div class="card">
-        <img src="createcard.jpg" alt="" class="bg" />
-        <div class="content">
-          <p>
-            <strong>Rite of Alacrity:</strong>
-            <em
-              ><span style="font-weight: 400"
-                >My lord, I have had the most wonderful idea for a new spell
-                which will greatly aid in completing day to day tasks through
-                invigoration. If you’d just be willing to lend a small sum and
-                permit some discretion in my use here, then I have no doubt we
-                will see the benefits.
-              </span></em
-            ><span style="font-weight: 400">Regent Choice.</span>
-          </p>
-          <p>
-            <span style="font-weight: 400">“Fund The Experiment” - </span
-            ><em
-              ><span style="font-weight: 400"
-                >You’ll have your funding, but we expect tangible results for
-                someone
-              </span></em
-            ><strong><em>other</em></strong
-            ><em><span style="font-weight: 400"> than you for once. </span></em
-            ><span style="font-weight: 400">Magic 7 Test.</span>
-          </p>
-          <p>
-            <span style="font-weight: 400"
-              >Pass: The Archmage chooses a character other than themselves.
-              That character draws an additional card at the start of their turn
-              until the completion of the current ritual tier. -1 Treasury &amp;
-              -2 Mana.</span
-            >
-          </p>
-          <p>
-            <span style="font-weight: 400"
-              >Fail: -1 Treasury &amp; -2 Mana.</span
-            >
-          </p>
-          <!-- <p>
-            <span style="font-weight: 400">“We Can’t Afford To” </span
-            ><em
-              ><span style="font-weight: 400"
-                >Why don’t you stick to more proven rites?
-              </span></em
-            ><span style="font-weight: 400">Nothing Happens.</span>
-          </p>
-          <p>
-            <strong>Infiltrator:</strong>
-            <em
-              ><span style="font-weight: 400"
-                >Stumbling into an obvious enemy mid-mischief on one’s way to
-                the privy is either a blessing or a curse, depending on how you
-                look at it.</span
-              ></em
-            ><span style="font-weight: 400"> Revealer Choice: </span>
-          </p>
-          <p>
-            <span style="font-weight: 400">“Raise the Alarm” </span
-            ><em
-              ><span style="font-weight: 400"
-                >The Castle Guard can be here in one minute-just gotta stall
-                until then</span
-              ></em
-            ><span style="font-weight: 400"
-              >. The Revealer discards all skill cards in their hand.</span
-            >
-          </p>
-          <p>
-            <span style="font-weight: 400">“Slay the Saboteur” </span
-            ><em
-              ><span style="font-weight: 400"
-                >No time to call for backup-it’s hero time.</span
-              ></em
-            ><span style="font-weight: 400">
-              Military 6 Check. Pass, nothing happens. Fail, Wound the Revealer.
-              Draw a Damage! Card.</span
-            >
-          </p> -->
-        </div>
-      </div>
-      <div class="card">
-        <img src="createcard.jpg" alt="" class="bg" />
-        <div class="content">
-          <h2>Plots in Plots:</h2>
-          <p>
-            Yesterday I wined with the Merchant and discussed a recent vacation
-            taken before the Siege, during which conversation fifteen different
-            secret passphrases and veiled references to ongoing plots and secret
-            societies were mentioned. Today I discover which tidbits were
-            sincere coincidences, and which were cunning allusions. Tomorrow I
-            figure out why this warranted my attention.
-          </p>
-          <h3>Intrigue 6 Test.</h3>
-          <p>Pass: Nothing Fail: -2 Treasury.</p>
-        </div>
-      </div>
-
-      <!-- <div class="card">
-        Consequat quis aliqua nulla Lorem elit aute amet duis. Magna do amet
-        veniam mollit amet ad sint ullamco et. Est qui duis commodo pariatur
-        laborum minim ad aliqua non dolore. Laboris dolor minim aute ullamco
-        irure. Culpa et minim esse sunt veniam pariatur incididunt elit laborum
-        mollit sint duis eu sunt.
-      </div>
-      <div class="card">
-        Exercitation proident duis culpa id excepteur eu duis id nostrud velit
-        id.
-      </div> -->
-    </div>
+    <div id="cards"></div>
+    <script src="data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
