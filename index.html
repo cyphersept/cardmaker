@@ -5,19 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <form>
+      <header>
+        <label
+          >Name of card set:
+          <input type="text" name="name" id="name" />
+        </label>
+        <button type="button">Download all</button>
+      </header>
+      <div class="add-contents">
+        <div>
+          <label for="inner-contents"
+            >Contents (<a
+              href="https://text-html.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Convert to HTML and clean</a
+            >):
+          </label>
+          <button type="button">Update Contents</button>
+        </div>
+        <textarea name="inner-contents" id="inner-contents"></textarea>
+      </div>
+    </form>
+    <div id="cards"></div>
     <script src="libs/dom-to-image.js"></script>
     <script src="libs/FileSaver.min.js"></script>
     <script src="libs/jszip.min.js"></script>
-  </head>
-  <body>
-    <header>
-      <label
-        >Name of card set:
-        <input type="text" name="name" id="name" />
-      </label>
-      <button type="button">Download all</button>
-    </header>
-    <div id="cards"></div>
     <script src="data.js"></script>
     <script src="script.js"></script>
   </body>

@@ -1,6 +1,8 @@
 document.querySelector("button").onclick = downloadAllCards;
+document.querySelector(".add-contents button").onclick = updateContents;
+document.getElementById("inner-contents").value = events;
 
-// to html https://text-html.com/
+// to html https://text-html.csom/
 
 // regex filters to separate content out of god-awful formatting
 const filters = {
@@ -110,4 +112,8 @@ function downloadAllCards() {
   );
 }
 
-generateCardsFromContent(events);
+function updateContents() {
+  document.getElementById("cards").innerHTML = "";
+  generateCardsFromContent(document.getElementById("inner-contents").value);
+}
+updateContents();
