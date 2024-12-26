@@ -129,8 +129,9 @@ function applySkillFilters(str = "") {
       // Separate card for each number
       numbers.forEach((n) => {
         const flavour = inner.match(fs.flavour);
-        if (!flavour) return;
-        const alts = flavour[0].replace(fs.emTags, "").split("|");
+        const alts = flavour
+          ? flavour[0].replace(fs.emTags, "").split("|")
+          : [""];
 
         // Separate card for each variant
         alts.forEach((alt) =>
