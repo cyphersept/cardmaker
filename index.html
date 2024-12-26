@@ -8,14 +8,23 @@
   </head>
   <body>
     <form>
-      <header>
+      <fieldset>
+        <legend>Cardset Info:</legend>
+        <div>
+          <label>Type:
+            <select name="card-type" id="card-type">
+              <option value="event">Event</option>
+              <option value="decree">Decree</option>
+            </select>
+        </div>
+
         <label
           >Name of card set:
           <input type="text" name="name" id="name" />
         </label>
         <button type="button">Download all</button>
-      </header>
-      <div class="add-contents">
+      </fieldset>
+      <fieldset class="add-contents">
         <div>
           <label for="inner-contents"
             >Contents (<a
@@ -28,7 +37,7 @@
           <button type="button">Update Contents</button>
         </div>
         <textarea name="inner-contents" id="inner-contents"></textarea>
-      </div>
+      </fieldset>
     </form>
     <div id="cards"></div>
     <script src="libs/dom-to-image.js"></script>

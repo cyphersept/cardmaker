@@ -1,3 +1,17 @@
+const decrees = `<p><strong>War Taxes:</strong><em>Taxes can be levied in times of emergency, but no matter how dire the need, the people will hate you for putting your need above their own.| Death and Taxes are both said to be certainties in life. Be sure the people don&rsquo;t think they can get out of giving you one by giving you the other. </em>Action: Lose 2 loyalists. Roll a d10. Gain half that much Treasury, rounding down.</p>
+<p><strong>Writ of Arrest: </strong><em>By the Order of the Regent acting in the Name of the King, you are under arrest for treason against the Kingdom and her People | The Council has seen through your treachery and expects a full confession of your crimes by the morning. Let&rsquo;s discuss what that confession ought to say, shall we?</em> Select a character not in the Dungeon. They are moved to the Dungeon.</p>
+<p><strong>Royal Pardon:</strong><em>To err is human, but mercy is divine. The King is Divine, and thus Regent is fit to see to the matter of mercy. | Even the vilest of blackguard can still serve their kingdom well, if given the chance. </em>Select a character in the Dungeon. Place them in a chosen Room.</p>
+<p><strong>Order Foraging:</strong><em>A poacher kills a farmer&rsquo;s cow, and he is hanged. A soldier does the same, and he is commended for the good find. Justice is in the eyes of the authority. </em>| <em>An army lives off the land at the expense of the people living there.</em> Action: Lose 2 Loyalists. Roll a d10. 3+, gain 2 Supplies. 7+, gain 3 Supplies.</p>
+<p><strong>Declare Festivus: </strong><em>War is no time to let a good feast go to waste</em>. <em>Just don&rsquo;t think about the cost.</em> Action: Lose 2 Supplies and 2 Treasury. Gain 5 Loyalists.</p>
+<p><strong>Conscription:</strong><em>Too old and too young; if this is what we&rsquo;re down to, we have no chance.</em> Action: Lose 1 Loyalist and 1 Treasury. Gain 3 Armies. | <em>The issue with recalling veterans is they know too much to get away with giving them scraps. At least their recall won&rsquo;t raise too much concern.</em> Action: Lose 1 Treasury and 1 Supply. Gain 3 Armies.</p>
+<p><strong>Rousing Speech:</strong><em>[Insert Speech Here]|I will not ask of you the so-called virtues of Duty, Honor, or Grace - only for your loyalty. Without Loyalty, a subject's virtues are nothing more than your enemy&rsquo;s boon. </em>| <em>[insert funny speech here] </em>Action: Roll a d10. 1-3 gain nothing. 4-6 gain 1 Loyalist. 7-9 gain 2 Loyalists. 10 gain 3 Loyalists.</p>
+<p><strong>Abdication:</strong><em>There are concerns about the actions taken by this regency council. A change of formal leadership may go a long way towards placating the masses. </em>Remove the title of Regent from the Regent. Pass it to the highest available character in succession.</p>
+<p><strong>Appoint Grand Inquisitor:</strong><em>It's an old office, one not filled in a century, but in these trying times, an independent arbiter held beyond reproach may be just what this kingdom needs.</em> Action: Place this card in front of another player. At any applicable time, they may discard this card to either choose the outcome of a Council Vote, or to reveal a character&rsquo;s hand of Skill Cards.</p>
+<p><strong>Emergency Repairs:</strong><em>Rip out the nails and salvage the lumber, what good will sturdy thatching be if the Wall falls? |Normally I would disallow the addition of any material not fully vetted by a thorough inspection by the Guild, however under the circumstances I am willing to bypass regulations | It&rsquo;s more of a ramshackle pile of wreckage than a wall at this point, but it&rsquo;ll hold. </em>Spend 2 Supplies to heal the Wall HP by 1.</p>
+<p><strong>Executive Authority:</strong><em>I speak for the King. To gainsay the King&rsquo;s word is treason. Obey or die. | I would never wish to circumvent the authority of the War Council, but you do remember I </em><b><em>am</em></b><em> the Regent, yes? | Surely, Chancellor, you understand that some opinions hold more sway than others in these times of crisis?</em> Play at any point during a Council Vote: Gain two additional Votes.</p>
+<p><strong>Succession:</strong><em>I will not entrust our lives to a cowardly drunkard any longer. By the Order of the Regent, you are accused of dereliction of the duties of your office, and will surrender your Staff of Office to your apprentice immediately</em>. The position of Archmage is passed to the next in line of succession.</p>
+<p><strong>Delegate Authority:</strong><em>The War Council serves an important function, but certain tasks require specialized approaches, free from their politicking | Give me three good men and your discretion, and I will ensure our problem will go away forever. </em>Play when a Crisis is revealed. Select up to three characters. Only they may contribute cards to resolve this crisis.&nbsp;</p>`;
+
 const events = `<p><strong>Mercenaries: </strong><em><span style="font-weight: 400;">Their demands may be outrageous, but fighting men are always needed, and I worry what they might do if we reject them&hellip;</span></em><span style="font-weight: 400;"> Council Vote:</span></p>
 <p><span style="font-weight: 400;">&ldquo;Hire Them&rdquo; </span><em><span style="font-weight: 400;">We always need more soldiers, expensive as they may be. </span></em><span style="font-weight: 400;">Lose 3 Treasury, add one Army to the Reserve.</span></p>
 <p><span style="font-weight: 400;">&ldquo;Send them Off&rdquo; </span><em><span style="font-weight: 400;">Did they really think we would consider such outrageous demands?</span></em><span style="font-weight: 400;"> Skill check 11 Military + Intrigue. Pass, nothing happens. Fail, add 2 Bandits and 1 War Machine to PLAINS.</span></p>
@@ -75,7 +89,7 @@ const events = `<p><strong>Mercenaries: </strong><em><span style="font-weight: 4
 <p><span style="font-weight: 400;">Pass: Nothing.&nbsp;</span></p>
 <p><span style="font-weight: 400;">Fail: -2 Treasury.</span></p>
 <p>&nbsp;</p>
-<p><strong>Brazen Assault: </strong><span style="font-weight: 400;">The enemy has sent a crack team of adventurers to storm our walls. Repel them, lest they open the gate! Military 5 Test. Activate All Near.</span></p>
+<p><strong>Brazen Assault: </strong><em>The enemy has sent a crack team of adventurers to storm our walls. Repel them, lest they open the gate!</em><span style="font-weight: 400;"> Military 5 Test. Activate All Near.</span></p>
 <p><span style="font-weight: 400;">Pass: Nothing</span></p>
 <p><span style="font-weight: 400;">Fail: Suffer 1 Damage! Gain an additional card of Damage! for every 2 degrees this test was failed by. (So if you end up with 1 total score after adding and subtracting all card values, you suffer 3 Damage!, for example).</span></p>
 <p>&nbsp;</p>
@@ -218,3 +232,33 @@ const events = `<p><strong>Mercenaries: </strong><em><span style="font-weight: 4
 <p><span style="font-weight: 400;">&nbsp;Add </span><em><span style="font-weight: 400;">The Limicello</span></em><span style="font-weight: 400;"> Monster &amp; 2 Bandits to Far BEACH. Add 3 Bandits to Near BEACH. Then: Activate the Beach Quadrant.</span></p>
 <p>&nbsp;</p>
 <p><strong>Insurgency:</strong><span style="font-weight: 400;"> Activate the Woods, Mountains, and Plains. Then, Add 3 Bandits &amp; 1 War Machine to the Far WOODS. Add 2 Bandits to the Far Mountains. Add 1 War Machine to the Far PLAINS.</span></p>`;
+
+const skills = `<p>Leadership - Yellow</p>
+<p>1&amp;2: Council Command - Play on a character&rsquo;s turn. They may immediately use a room action. <em>By the order of the Regency Council, you will see to this duty at once.</em></p>
+<p>3&amp;4: Emergency Mandate - Play after a Crisis has been revealed. Lower the difficulty (and pass thresholds) of this Crisis by 3. A Crisis&rsquo;s difficulty cannot be lowered below 1. <em>NOTICE - The Council has decreed a State of Emergency. Do not be alarmed.</em></p>
+<p>5: Political Maneuvering - Play when a Council Vote or Regent Choice is made: Nullify that decision. Choose a different option. <em>No one will remember what arguments were made, or what votes were tallied. All they will know is your choice. </em>| <em>Some write history in ink. The Great write history in blood.</em>| <em>How intoxicating it must be, to shape the Will of a Nation and the Destiny of a People to the thunderous roar of applause.&nbsp;</em></p>
+<p>Intrigue - Purple</p>
+<p>1&amp;2: Diplomatic Overtures - Play when an &ldquo;Activate Attackers&rdquo; symbol is shown. Roll a die. On a 8+, a chosen section that would activate this turn doesn&rsquo;t activate. [Still maybe needs to just be something else]</p>
+<p>1&amp;2: Haste - Play on a character&rsquo;s turn: they may make an additional movement this turn. <em>So much of life is about being in the right place at the right time.</em></p>
+<p>3&amp;4: Audit - Action: Look at a character&rsquo;s hand of skill cards. Normal rules of discretion still apply. <em>You have nothing to fear if your story matches the records.</em></p>
+<p>5: Spy Network - Play after a Crisis has been revealed, but before skill cards are played. All cards, including those from the Chance Deck, are played face up during this Crisis. <em>Knowledge is a power as deadly as any weapon. </em>| <em>Weeks of preparation, countless hours of toil and expense, all for one glorious moment of control.</em> | <em>Ye shall know the truth, and the truth will set you free</em>.</p>
+<p><br /><br /></p>
+<p>Stewardship - Green</p>
+<p>1&amp;2: Repair Fortifications - Action: Repair your current room <em>or </em>repair the Wall&rsquo;s HP by one if you are on the Ramparts.</p>
+<p>3&amp;4: Gather Resources - Play on a character&rsquo;s turn: They Draw Two Cards.</p>
+<p>5: Consolidate Assets - Action: Exchange 2 of any Resource (Treasury, Loyalists, Mana, Supplies) for 2 of any other Resource. You cannot reduce a Resource to 0 as a result of this. <em>X</em> | <em>X</em> | <em>X</em>.</p>
+<p><br /><br /></p>
+<p>Military - Red</p>
+<p>1&amp;2: Prowess - Play when a die is rolled: Add +1 or -1 to the result of a die&rsquo;s roll. <em>Luck has no place on the battlefield. Not for you, anyways.</em></p>
+<p>3&amp;4: Scouting Expedition - Action: Roll a d10. On a 6+, look at the next two Crisis Cards and place one on the top and one on the bottom of the Crisis Deck. <em>Only a fool marches blindly towards the horizon.&nbsp;</em></p>
+<p>5: Brilliant Tactics - Play on a character&rsquo;s turn: They may take another turn after their current turn. Do not proceed to the &ldquo;Draw Crisis&rdquo; step until all of a character&rsquo;s turns have been taken. <em>Strike swiftly, and then do not relent in your blows until the foe has been utterly destroyed.</em> | <em>I will fight on forever.</em> | <em>Victory is achieved not by the strongest, nor the smartest, nor the meanest, but by the man who refuses to surrender</em>.</p>
+<p><br /><br /></p>
+<p>Magic - Light Blue</p>
+<p>1&amp;2: Haste - Play on a character&rsquo;s turn: they may make an additional movement this turn.</p>
+<p>1&amp;2: Cantrip - All Magic 1&amp;2 Cards are an insular version of the other faction&rsquo;s card:&nbsp;</p>
+<p>*Leadership - &lsquo;Mirror Image&rsquo; Play on your turn. Immediately make a Room Action.</p>
+<p>*Intrigue - &lsquo;Celerity&rsquo; - Play on your turn. You may make an additional movement this turn.</p>
+<p>*Stewardship - &lsquo;Mending&rsquo; - Action: Repair your Current Room. Cannot be used to Repair the Wall.</p>
+<p>*Military - &lsquo;Nudge&rsquo; - Play when you roll a die: Add +1 or -1 to the result.</p>
+<p>3&amp;4: Channel Reserves - Action: Roll a d10. 1-5: Gain Nothing. 6-7: Gain 1 Mana. 8-9: Gain 2 Mana. 10: Gain 3 Mana. <em>We&rsquo;re going to need every last mote of power we can get.</em></p>
+<p>5: Flexible Casting - Play when a Skill Test occurs: Choose a Skill Type. All Cards of this type are treated as positive/beneficial for this Skill Test. <em>X</em> | <em>X</em> | <em>X</em>.</p>`;

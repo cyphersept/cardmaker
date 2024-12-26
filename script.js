@@ -1,75 +1,124 @@
 document.querySelector("button").onclick = downloadAllCards;
 document.querySelector(".add-contents button").onclick = updateContents;
-document.getElementById("inner-contents").value = events;
+document.getElementById("card-type").onchange = () => {
+  updateCardType();
+  updateContents();
+};
+
+updateCardType();
 
 // to html https://text-html.csom/
 
 // regex filters to separate content out of god-awful formatting
 const filters = {
-  removeQuantities: /\(x[0-9]\)(?=[\s\S]*<strong>.*:)/gm,
-  separateCard: /<p>[\S\s]*(?=<p>[\S\s]*<strong>.*:<\/strong>)/g,
-  startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
-  title: /<p><strong>.*<\/strong>/g,
-  flavor: /(?:strong>)<em>.*<\/em>/g,
-  types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
-  passFail: /(Pass|Failure|Partial Success|Partial|Fail)[.,-]?/g,
-  conditions:
-    /(?<=\>( ?|Activate.*))(Revealer Choice|Council Vote|Regent Choice)[:.-]?/g,
-  options:
-    /(?<=(Revealer Choice|Council Vote|Regent Choice)[\s\S]*)&ldquo;.{3,50}&rdquo;(?! ([aA]ction|[cC]ard))/g,
-  fuckColons: /:/g,
-  fuckSpaces: /(<p>&nbsp;<\/p>|&nbsp;)/g,
-  damage: /Damage!/g,
-  checks: /([0-9]+) .{0,60}(Test|Check)/g,
-  ifs: /IF .{5,50}:/g,
-  if2: /(?<=IF[\s\S]*)IF/g,
-  ritualTier: /(?<=Tier [0-8]) ritual/g,
-  activate: /Activate [\w ,]{9,60}\./,
+  event: {
+    // separateCard: /<p>[\S\s]*(?=<p>[\S\s]*<strong>.*:<\/strong>)/g,
+    // title: /<p><strong>.*<\/strong>/g,
+    // flavor: /(?:strong>)<em>.*<\/em>/g,
+    activate: /Activate [\w ,]{9,60}\./,
+    checks: /([0-9]+) .{0,60}(Test|Check)/g,
+    conditions:
+      /(?<=\>( ?|Activate.*))(Revealer Choice|Council Vote|Regent Choice)[:.-]?/g,
+    damage: /Damage!/g,
+    fuckColons: /:/g,
+    fuckSpaces: /(<p>&nbsp;<\/p>|&nbsp;)/g,
+    ifs: /IF .{5,50}:/g,
+    if2: /(?<=IF[\s\S]*)IF/g,
+    options:
+      /(?<=(Revealer Choice|Council Vote|Regent Choice)[\s\S]*)&ldquo;.{3,50}&rdquo;(?! ([aA]ction|[cC]ard))/g,
+    passFail: /(Pass|Failure|Partial Success|Partial|Fail)[.,-]?/g,
+    removeQuantities: /\(x[0-9]\)(?=[\s\S]*<strong>.*:)/gm,
+    ritualTier: /(?<=Tier [0-8]) ritual/g,
+    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
+    types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
+  },
+  decree: {
+    action: /Action:/g,
+    damage: /Damage!/g,
+    emTags: /(<em>|<\/em>)/g,
+    flavour: /(<em>).+(<\/em>)/,
+    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
+    types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
+  },
+  skill: {
+    action: /Action:/g,
+    damage: /Damage!/g,
+    emTags: /(<em>|<\/em>)/g,
+    flavour: /(<em>).+(<\/em>)/,
+    number: /[0-9](&[0-9])?:/g,
+    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
+    types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
+  },
 };
 
 // Apply useful filters and return an array of each card's innerHTML
-function applyFilters(str = "") {
+function applyEventFilters(str = "") {
+  const f = filters.event;
   // Adds useful tags to keywords
   const newStr = str
-    .replace(filters.removeQuantities, "")
-    .replace(filters.ifs, "<b class='unfuck-colons'>$&</b>")
-    .replace(filters.if2, "<br><br>$&")
-    .replace(filters.ritualTier, "<label class='ritual word padder'>$&</label>")
-    .replace(filters.fuckColons, "")
-    .replace(filters.fuckSpaces, "")
-    .replace(filters.damage, "<b>$&</b>")
-    .replace(filters.passFail, "<b class='success unfuck-colons'>$1</b>")
-    .replace(filters.options, "<b class='quotes'>$&</b>")
-    .replace(filters.types, "<label class='type $&'>$&</label>")
-    .replace(filters.activate, "<label class='activate'>$&</label>")
-    .replace(filters.conditions, "<label class='condition'>$&</label>")
-    .replace(filters.checks, "<label class='check' data-diff='$1'>$&</label>")
-    .replace(filters.startOfCard, "!!BREAK$&");
+    .replace(f.removeQuantities, "")
+    .replace(f.ifs, "<b class='unfuck-colons'>$&</b>")
+    .replace(f.if2, "<br><br>$&")
+    .replace(f.ritualTier, "<label class='ritual word padder'>$&</label>")
+    .replace(f.fuckColons, "")
+    .replace(f.fuckSpaces, "")
+    .replace(f.damage, "<b>$&</b>")
+    .replace(f.passFail, "<b class='success unfuck-colons'>$1</b>")
+    .replace(f.options, "<b class='quotes'>$&</b>")
+    .replace(f.types, "<label class='type $&'>$&</label>")
+    .replace(f.activate, "<label class='activate'>$&</label>")
+    .replace(f.conditions, "<label class='condition'>$&</label>")
+    .replace(f.checks, "<label class='check' data-diff='$1'>$&</label>")
+    .replace(f.startOfCard, "!!BREAK$&");
 
   // Split each card to separate string in array
   const cards = newStr.split("!!BREAK");
   return cards;
 }
 
-const data = `<strong>Mercenaries: </strong><em>Their demands may be outrageous, but fighting men are always needed, and I worry what they might do if we reject them&hellip;</em> Council Vote:</p>
-<p>&ldquo;Hire Them&rdquo; <em>We always need more soldiers, expensive as they may be. </em>Lose 3 Treasury, add one Army to the Reserve.</p>
-<p>&ldquo;Send them Off&rdquo; <em>Did they really think we would consider such outrageous demands?</em> Skill check 11 Military + Intrigue. Pass, nothing happens. Fail, add 2 Bandits and 1 War Machine to PLAINS.</p>
-<p><strong>Mercenaries: </strong><em>Their demands may be outrageous, but fighting men are always needed, and I worry what they might do if we reject them&hellip;</em> Council Vote:</p>
-<p>&ldquo;Hire Them&rdquo; <em>We always need more soldiers, expensive as they may be. </em>Lose 3 Treasury, add one Army to the Reserve.</p>
-<p>&ldquo;Send them Off&rdquo; <em>Did they really think we would consider such outrageous demands?</em> Skill check 11 Military + Intrigue. Pass, nothing happens. Fail, add 2 Bandits and 1 War Machine to PLAINS.</p>
-<p><strong>Mercenaries: </strong><em>Their demands may be outrageous, but fighting men are always needed, and I worry what they might do if we reject them&hellip;</em> Council Vote:</p>
-<p>&ldquo;Hire Them&rdquo; <em>We always need more soldiers, expensive as they may be. </em>Lose 3 Treasury, add one Army to the Reserve.</p>
-<p>&ldquo;Send them Off&rdquo; <em>Did they really think we would consider such outrageous demands?</em> Skill check 11 Military + Intrigue. Pass, nothing happens. Fail, add 2 Bandits and 1 War Machine to PLAINS.</p>
-<p>`;
+function applyDecreeFilters(str = "") {
+  const fd = filters.decree;
+  // Adds useful tags to keywords
+  const newStr = str
+    .replace(fd.action, "<b>$&</b>")
+    .replace(fd.damage, "<b>$&</b>")
+    .replace(fd.types, "<label class='type $&'>$&</label>")
+    .replace(fd.checks, "<label class='check' data-diff='$1'>$&</label>")
+    .replace(fd.startOfCard, "!!BREAK$&");
 
-// function parseCard(str) {
-//   const splitLines = str.split("\n\n");
-//   const titleRegex = /^.*:/;
-//   splitLines.map((line) => {
-//     const parts = line.split();
-//   });
-// }
+  // Split each card to separate string in array
+  const cards = [];
+  newStr.split("!!BREAK").forEach((inner) => {
+    const flavour = inner.match(fd.flavour);
+    if (!flavour) return;
+    const alts = flavour[0].replace(fd.emTags, "").split("|");
+    alts.forEach((alt) => cards.push(inner.replace(fd.flavour, `$1${alt}$2`)));
+  });
+  return cards;
+}
 
+function applySkillFilters(str = "") {
+  const fd = filters.decree;
+  // Adds useful tags to keywords
+  const newStr = str
+    .replace(fd.action, "<b>$&</b>")
+    .replace(fd.damage, "<b>$&</b>")
+    .replace(fd.types, "<label class='type $&'>$&</label>")
+    .replace(fd.checks, "<label class='check' data-diff='$1'>$&</label>")
+    .replace(fd.startOfCard, "!!BREAK$&");
+
+  // Split each card to separate string in array
+  const cards = [];
+  newStr.split("!!BREAK").forEach((inner) => {
+    const flavour = inner.match(fd.flavour);
+    if (!flavour) return;
+    const alts = flavour[0].replace(fd.emTags, "").split("|");
+    alts.forEach((alt) => cards.push(inner.replace(fd.flavour, `$1${alt}$2`)));
+  });
+  return cards;
+}
+
+// Generate card element with inner content and add it to the DOM
 function createCard(inner) {
   const card = document.createElement("div");
   const img = document.createElement("img");
@@ -85,25 +134,30 @@ function createCard(inner) {
   document.getElementById("cards").appendChild(card);
 }
 
-function generateCardsFromContent(content) {
-  applyFilters(content).forEach((inner) => {
-    createCard(inner);
-  });
+// Take inner-content input, clean and separate it into cards
+function generateCards(content, type) {
+  document.getElementById("cards").classList = type;
+  if (type === "event")
+    applyEventFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
+  else if (type === "decree")
+    applyDecreeFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
 }
 
-async function addNodeToZip(domNode, name, zip) {
-  return domtoimage.toBlob(domNode).then(function (blob) {
-    zip.file(name + ".png", blob);
-  });
-}
-
+// Convert each card to png and download
 function downloadAllCards() {
   const name = document.getElementById("name").value;
   const zip = new JSZip();
   const allCards = [...document.querySelectorAll(".card")];
-  const zipArr = allCards.map((node, index) =>
-    addNodeToZip(node, name + index, zip)
-  );
+  const addNodeToZip = async (domNode, name, zip) => {
+    return domtoimage.toBlob(domNode).then((blob) => {
+      zip.file(name + ".png", blob);
+    });
+  };
+  const zipArr = allCards.map((node, i) => addNodeToZip(node, name + i, zip));
 
   Promise.all(zipArr).then(() =>
     zip.generateAsync({ type: "blob" }).then((content) => {
@@ -112,8 +166,18 @@ function downloadAllCards() {
   );
 }
 
+function updateCardType() {
+  const newType = document.getElementById("card-type").value;
+  const contentMap = {
+    event: events,
+    decree: decrees,
+  };
+  document.getElementById("inner-contents").value = contentMap[newType];
+}
+
 function updateContents() {
+  const type = document.getElementById("card-type").value;
   document.getElementById("cards").innerHTML = "";
-  generateCardsFromContent(document.getElementById("inner-contents").value);
+  generateCards(document.getElementById("inner-contents").value, type);
 }
 updateContents();
