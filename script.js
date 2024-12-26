@@ -104,15 +104,16 @@ function applySkillFilters(str = "") {
   const fs = filters.skill;
   // Adds useful tags to keywords
   const newStr = str
+    .replace(fs.type, "!!SECTION$&")
     .replace(fs.fuckSpaces, "")
     .replace(fs.action, "<b>$&</b>")
     .replace(fs.damage, "<b>$&</b>")
     .replace(fs.title, "$1!!INSERTTYPE")
-    .replace(fs.type, "!!SECTION$&")
     .replace(fs.startOfCard, "!!BREAK$&");
 
   const cards = [];
   newStr.split("!!SECTION").forEach((section) => {
+    console.log(section);
     // Extract type of card for the section
     const typeHead = section.match(fs.type);
     if (!typeHead) return;

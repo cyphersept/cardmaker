@@ -251,9 +251,9 @@ const skills = `<p>Leadership - Yellow</p>
 <p>Military - Red</p>
 <p>1&amp;2: Prowess - Play when a die is rolled: Add +1 or -1 to the result of a die&rsquo;s roll. <em>Luck has no place on the battlefield. Not for you, anyways.</em></p>
 <p>3&amp;4: Scouting Expedition - Action: Roll a d10. On a 6+, look at the next two Crisis Cards and place one on the top and one on the bottom of the Crisis Deck. <em>Only a fool marches blindly towards the horizon.&nbsp;</em></p>
-<p>5: Brilliant Tactics - Play on a character&rsquo;s turn: They may take another turn after their current turn. Do not proceed to the &ldquo;Draw Crisis&rdquo; step until all of a character&rsquo;s turns have been taken. <em>Strike swiftly, and then do not relent in your blows until the foe has been utterly destroyed.</em> | <em>I will fight on forever.</em> | <em>Victory is achieved not by the strongest, nor the smartest, nor the meanest, but by the man who refuses to surrender</em>.</p>
+<p>5: Brilliant Tactics - Play on a character&rsquo;s turn: They may take another turn after their current turn. Do not proceed to the &ldquo;Draw Crisis&rdquo; step until all of a character&rsquo;s turns have been taken. <em>Strike swiftly, and then do not relent in your blows until the foe has been utterly destroyed.</em> | <em>I will fight on forever.</em> | <em>Victory is achieved not by the strongest, nor the smartest, nor the meanest, but by the man who refuses to surrender.</em></p>
 <p><br /><br /></p>
-<p>Magic - Light Blue</p>
+<p>Magic - Blue</p>
 <p>1&amp;2: Haste - Play on a character&rsquo;s turn: they may make an additional movement this turn.</p>
 <p>1&amp;2: Cantrip - All Magic 1&amp;2 Cards are an insular version of the other faction&rsquo;s card:&nbsp;</p>
 <p>*Leadership - &lsquo;Mirror Image&rsquo; Play on your turn. Immediately make a Room Action.</p>
