@@ -43,11 +43,14 @@ const filters = {
   skill: {
     action: /Action:/g,
     damage: /Damage!/g,
-    emTags: /(<em>|<\/em>)/g,
-    flavour: /(<em>).+(<\/em>)/,
-    number: /[0-9](&[0-9])?:/g,
-    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
-    types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
+    end: /<\/p>/,
+    flavour: /(<em>).+(<\/em>)(?=\.?<\/p>)/g,
+    fuckSpaces: /<p><br \/><br \/><\/p>/g,
+    number: /[0-9](&amp;[0-9])?:/g,
+    startOfCard: /<p>[0-9](&amp;[0-9])?:/g,
+    title: /(?<=[0-9]: )([\w ]+) - /g,
+    type: /<p>(Leadership|Military|Stewardship|Intrigue|Magic) - \w{3,15}<\/p>/g,
+    typeOnly: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
   },
 };
 
@@ -98,22 +101,48 @@ function applyDecreeFilters(str = "") {
 }
 
 function applySkillFilters(str = "") {
-  const fd = filters.decree;
+  const fs = filters.skill;
   // Adds useful tags to keywords
   const newStr = str
-    .replace(fd.action, "<b>$&</b>")
-    .replace(fd.damage, "<b>$&</b>")
-    .replace(fd.types, "<label class='type $&'>$&</label>")
-    .replace(fd.checks, "<label class='check' data-diff='$1'>$&</label>")
-    .replace(fd.startOfCard, "!!BREAK$&");
+    .replace(fs.fuckSpaces, "")
+    .replace(fs.action, "<b>$&</b>")
+    .replace(fs.damage, "<b>$&</b>")
+    .replace(fs.title, "$1!!INSERTTYPE")
+    .replace(fs.type, "!!SECTION$&")
+    .replace(fs.startOfCard, "!!BREAK$&");
 
-  // Split each card to separate string in array
   const cards = [];
-  newStr.split("!!BREAK").forEach((inner) => {
-    const flavour = inner.match(fd.flavour);
-    if (!flavour) return;
-    const alts = flavour[0].replace(fd.emTags, "").split("|");
-    alts.forEach((alt) => cards.push(inner.replace(fd.flavour, `$1${alt}$2`)));
+  newStr.split("!!SECTION").forEach((section) => {
+    // Extract type of card for the section
+    const typeHead = section.match(fs.type);
+    if (!typeHead) return;
+    const type = typeHead[0].match(fs.typeOnly)[0];
+    const typeHTML = `<p class="card-type ${type.toLowerCase()}">${type}</p>`;
+    const cardsStr = section.replace(fs.type, "");
+
+    // Split each card to separate string in array
+    cardsStr.split("!!BREAK").forEach((inner) => {
+      const number = inner.match(fs.number);
+      const numbers = number ? number[0].match(/[0-9]/g) : [0];
+
+      // Separate card for each number
+      numbers.forEach((n) => {
+        const flavour = inner.match(fs.flavour);
+        if (!flavour) return;
+        const alts = flavour[0].replace(fs.emTags, "").split("|");
+
+        // Separate card for each variant
+        alts.forEach((alt) =>
+          cards.push(
+            inner
+              .replace(fs.flavour, `<em class="flavour">${alt}$2`)
+              .replace(fs.end, `<label data-value=${n}> </label>$&`)
+              .replace(/!!INSERTTYPE/g, typeHTML)
+              .replace(fs.number, "")
+          )
+        );
+      });
+    });
   });
   return cards;
 }
@@ -145,6 +174,10 @@ function generateCards(content, type) {
     applyDecreeFilters(content).forEach((inner) => {
       createCard(inner);
     });
+  else if (type === "skill")
+    applySkillFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
 }
 
 // Convert each card to png and download
@@ -171,6 +204,7 @@ function updateCardType() {
   const contentMap = {
     event: events,
     decree: decrees,
+    skill: skills,
   };
   document.getElementById("inner-contents").value = contentMap[newType];
 }

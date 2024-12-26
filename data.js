@@ -241,12 +241,12 @@ const skills = `<p>Leadership - Yellow</p>
 <p>1&amp;2: Diplomatic Overtures - Play when an &ldquo;Activate Attackers&rdquo; symbol is shown. Roll a die. On a 8+, a chosen section that would activate this turn doesn&rsquo;t activate. [Still maybe needs to just be something else]</p>
 <p>1&amp;2: Haste - Play on a character&rsquo;s turn: they may make an additional movement this turn. <em>So much of life is about being in the right place at the right time.</em></p>
 <p>3&amp;4: Audit - Action: Look at a character&rsquo;s hand of skill cards. Normal rules of discretion still apply. <em>You have nothing to fear if your story matches the records.</em></p>
-<p>5: Spy Network - Play after a Crisis has been revealed, but before skill cards are played. All cards, including those from the Chance Deck, are played face up during this Crisis. <em>Knowledge is a power as deadly as any weapon. </em>| <em>Weeks of preparation, countless hours of toil and expense, all for one glorious moment of control.</em> | <em>Ye shall know the truth, and the truth will set you free</em>.</p>
+<p>5: Spy Network - Play after a Crisis has been revealed, but before skill cards are played. All cards, including those from the Chance Deck, are played face up during this Crisis. <em>Knowledge is a power as deadly as any weapon. </em>| <em>Weeks of preparation, countless hours of toil and expense, all for one glorious moment of control.</em> | <em>Ye shall know the truth, and the truth will set you free.</em></p>
 <p><br /><br /></p>
 <p>Stewardship - Green</p>
 <p>1&amp;2: Repair Fortifications - Action: Repair your current room <em>or </em>repair the Wall&rsquo;s HP by one if you are on the Ramparts.</p>
 <p>3&amp;4: Gather Resources - Play on a character&rsquo;s turn: They Draw Two Cards.</p>
-<p>5: Consolidate Assets - Action: Exchange 2 of any Resource (Treasury, Loyalists, Mana, Supplies) for 2 of any other Resource. You cannot reduce a Resource to 0 as a result of this. <em>X</em> | <em>X</em> | <em>X</em>.</p>
+<p>5: Consolidate Assets - Action: Exchange 2 of any Resource (Treasury, Loyalists, Mana, Supplies) for 2 of any other Resource. You cannot reduce a Resource to 0 as a result of this. <em>X</em> | <em>X</em> | <em>X</em></p>
 <p><br /><br /></p>
 <p>Military - Red</p>
 <p>1&amp;2: Prowess - Play when a die is rolled: Add +1 or -1 to the result of a die&rsquo;s roll. <em>Luck has no place on the battlefield. Not for you, anyways.</em></p>

@@ -13,13 +13,15 @@
   font-family: "Rosarivo", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 16px;
-  color: rgb(30, 29, 28);
+  color: --ink-black;
 
+  --ink-black: rgb(30, 29, 28);
+  --ink-black-semi: rgba(30, 29, 28, 0.9);
   --ink-red: hsl(10, 66%, 40%);
-  --ink-yellow: hsl(49, 100%, 23%);
+  --ink-yellow: hsl(39, 100%, 30%);
   --ink-green: hsl(79, 70%, 28%);
-  --ink-purple: hsl(306, 36%, 49%);
-  --ink-blue: hsl(205, 46%, 44%);
+  --ink-purple: hsl(306, 35%, 40%);
+  --ink-blue: hsl(205, 46%, 42%);
 }
 
 * {
@@ -113,6 +115,145 @@ form {
   }
 }
 
+.skill {
+  & > * {
+    font-size: 1.5rem;
+  }
+
+  .content > em {
+  }
+
+  *[data-value] {
+    position: absolute;
+    bottom: 4rem;
+    right: 4rem;
+    height: 8rem;
+    width: 8rem;
+    padding-top: 1.8rem;
+    font-size: 3rem;
+    text-align: center;
+    -webkit-mask-image: url("./imgs/seal-full.svg");
+    mask-image: url("./imgs/seal-full.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    background-color: var(--current-col);
+    mix-blend-mode: multiply;
+    font-weight: bold;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+
+    &::after {
+      position: absolute;
+      display: block;
+      height: 8rem;
+      width: 8rem;
+      z-index: 1;
+      content: attr(data-value);
+      opacity: 60%;
+    }
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .content > p:first-child {
+    font-size: 2.25rem !important;
+    color: white;
+    margin-bottom: 0 !important;
+    text-align: center;
+    margin: 0 -2.5rem;
+    width: calc(100% + 5rem);
+    mix-blend-mode: multiply;
+    --ribbon-col: #7c6439;
+    --s: 1.8em; /* the ribbon size */
+    --d: 0.5em; /* the depth */
+    --c: 0.5em; /* the cutout part */
+  }
+
+  /*Elements with ribbon background*/
+  .content > p:first-child,
+  .card-type {
+    padding: 0 calc(var(--s) + 0.5em) var(--d);
+    line-height: 2;
+    align-self: center;
+    background: conic-gradient(
+          at left var(--s) bottom var(--d),
+          #0000 25%,
+          #0008 0 37.5%,
+          #0004 0
+        )
+        0 /50% 100% no-repeat,
+      conic-gradient(
+          at right var(--s) bottom var(--d),
+          #0004 62.5%,
+          #0008 0 75%,
+          #0000 0
+        )
+        100%/50% 100% no-repeat;
+    clip-path: polygon(
+      0 var(--d),
+      var(--s) var(--d),
+      var(--s) 0,
+      calc(100% - var(--s)) 0,
+      calc(100% - var(--s)) var(--d),
+      100% var(--d),
+      calc(100% - var(--c)) calc(50% + var(--d) / 2),
+      100% 100%,
+      calc(100% - var(--s) - var(--d)) 100%,
+      calc(100% - var(--s) - var(--d)) calc(100% - var(--d)),
+      calc(var(--s) + var(--d)) calc(100% - var(--d)),
+      calc(var(--s) + var(--d)) 100%,
+      0 100%,
+      var(--c) calc(50% + var(--d) / 2)
+    );
+    background-color: var(--ribbon-col); /* the main color */
+  }
+
+  .card-type {
+    position: relative;
+    top: -1.15rem;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 18rem;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2;
+    mix-blend-mode: hard-light;
+    color: var(--ink-black-semi);
+    --ribbon-col: var(--current-col);
+    --s: 1.8em; /* the ribbon size */
+    --d: 0.5em; /* the depth */
+    --c: 0.8em; /* the cutout part */
+  }
+
+  .leadership,
+  .leadership ~ * {
+    --current-col: var(--ink-yellow);
+  }
+
+  .military,
+  .military ~ * {
+    --current-col: var(--ink-red);
+  }
+
+  .stewardship,
+  .stewardship ~ * {
+    --current-col: var(--ink-green);
+  }
+
+  .intrigue,
+  .intrigue ~ * {
+    --current-col: var(--ink-purple);
+  }
+
+  .magic,
+  .magic ~ * {
+    --current-col: var(--ink-blue);
+  }
+}
+
 .content {
   padding-top: 5.2rem;
   padding-left: 4.8rem;
@@ -127,7 +268,8 @@ form {
     margin-bottom: 0.5rem;
   }
 
-  & > *:first-child > em:first-of-type {
+  & > *:first-child > em:first-of-type,
+  .flavour {
     display: block;
     margin-bottom: 1rem;
 
@@ -166,72 +308,74 @@ form {
   }
 }
 
-.card label.check {
-  &::after,
-  &::before {
-    position: absolute;
-    width: 7.5rem;
-    height: 7.5rem;
-    top: 1.75rem;
-    right: 1.75rem;
-    z-index: -5;
-    opacity: 65%;
-    content: url("./imgs/seal.svg");
+label {
+  &.check {
+    &::after,
+    &::before {
+      position: absolute;
+      width: 7.5rem;
+      height: 7.5rem;
+      top: 1.75rem;
+      right: 1.75rem;
+      z-index: -5;
+      opacity: 65%;
+      content: url("./imgs/seal.svg");
+    }
+
+    &::before {
+      content: attr(data-diff) !important;
+      font-weight: bold;
+      transform: translateY(1.9rem);
+      font-size: 3rem;
+      text-align: center;
+      vertical-align: middle;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    }
   }
 
-  &::before {
-    content: attr(data-diff) !important;
+  &.type {
     font-weight: bold;
-    transform: translateY(1.9rem);
-    font-size: 3rem;
-    text-align: center;
-    vertical-align: middle;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-      "Lucida Sans", Arial, sans-serif;
+    &::before {
+      display: inline-block;
+      height: 1em;
+      width: 1em;
+    }
   }
-}
 
-.card label.type {
-  font-weight: bold;
-  &::before {
-    display: inline-block;
-    height: 1em;
-    width: 1em;
+  &.Leadership {
+    color: var(--ink-yellow);
+    &::before {
+      content: url("./imgs/leadership.svg");
+    }
   }
-}
 
-label.Leadership {
-  color: var(--ink-yellow);
-  &::before {
-    content: url("./imgs/leadership.svg");
+  &.Military {
+    color: var(--ink-red);
+    &::before {
+      content: url("./imgs/military.svg");
+    }
   }
-}
 
-label.Military {
-  color: var(--ink-red);
-  &::before {
-    content: url("./imgs/military.svg");
+  &.Stewardship {
+    color: var(--ink-green);
+    &::before {
+      content: url("./imgs/stewardship.svg");
+    }
   }
-}
 
-label.Stewardship {
-  color: var(--ink-green);
-  &::before {
-    content: url("./imgs/stewardship.svg");
+  &.Intrigue {
+    color: var(--ink-purple);
+    &::before {
+      content: url("./imgs/intrigue.svg");
+    }
   }
-}
 
-label.Intrigue {
-  color: var(--ink-purple);
-  &::before {
-    content: url("./imgs/intrigue.svg");
-  }
-}
-
-label.Magic {
-  color: var(--ink-blue);
-  &::before {
-    content: url("./imgs/magic.svg");
+  &.Magic {
+    color: var(--ink-blue);
+    &::before {
+      content: url("./imgs/magic.svg");
+    }
   }
 }
 
