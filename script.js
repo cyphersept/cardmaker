@@ -49,7 +49,7 @@ const filters = {
     number: /[0-9](&amp;[0-9])?:/g,
     startOfCard: /<p>[0-9](&amp;[0-9])?:/g,
     title: /(?<=[0-9]: )([\w ]+) - /g,
-    type: /<p>(Leadership|Military|Stewardship|Intrigue|Magic) - \w{3,15}<\/p>/g,
+    type: /<p>(<strong>)?(Leadership|Military|Stewardship|Intrigue|Magic) - \w{3,15}(<\/strong>)?<\/p>/g,
     typeOnly: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
   },
 };

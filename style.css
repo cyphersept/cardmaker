@@ -9,6 +9,12 @@
   font-style: italic;
 }
 
+@media print {
+  form {
+    display: none;
+  }
+}
+
 :root {
   font-family: "Rosarivo", "Trebuchet MS", "Lucida Sans Unicode",
     "Lucida Grande", "Lucida Sans", Arial, sans-serif;
