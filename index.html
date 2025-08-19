@@ -1,50 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <form>
-      <fieldset>
-        <legend>Cardset Info:</legend>
-        <div>
-          <label>Type:
-            <select name="card-type" id="card-type">
-              <option value="event">Event</option>
-              <option value="decree">Decree</option>
-              <option value="skill">Skill</option>
-            </select>
-        </div>
 
-        <label
-          >Name of card set:
-          <input type="text" name="name" id="name" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <form>
+    <fieldset>
+      <legend>Cardset Info:</legend>
+      <div>
+        <label>Type:
+          <select name="card-type" id="card-type">
+            <option value="event">Event</option>
+            <option value="decree">Decree</option>
+            <option value="skill">Skill</option>
+            <option value="damage">Damage</option>
+          </select>
+      </div>
+
+      <label>Name of card set:
+        <input type="text" name="name" id="name" />
+      </label>
+      <button type="button">Download all</button>
+    </fieldset>
+    <fieldset class="add-contents">
+      <div>
+        <label for="inner-contents">Contents (<a href="https://text-html.com/" target="_blank"
+            rel="noopener noreferrer">Convert to HTML and clean</a>):
         </label>
-        <button type="button">Download all</button>
-      </fieldset>
-      <fieldset class="add-contents">
-        <div>
-          <label for="inner-contents"
-            >Contents (<a
-              href="https://text-html.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Convert to HTML and clean</a
-            >):
-          </label>
-          <button type="button">Update Contents</button>
-        </div>
-        <textarea name="inner-contents" id="inner-contents"></textarea>
-      </fieldset>
-    </form>
-    <div id="cards"></div>
-    <script src="libs/dom-to-image.js"></script>
-    <script src="libs/FileSaver.min.js"></script>
-    <script src="libs/jszip.min.js"></script>
-    <script src="data.js"></script>
-    <script src="script.js"></script>
-  </body>
+        <button type="button">Update Contents</button>
+      </div>
+      <textarea name="inner-contents" id="inner-contents"></textarea>
+    </fieldset>
+  </form>
+  <div id="cards"></div>
+  <script src="libs/dom-to-image.js"></script>
+  <script src="libs/FileSaver.min.js"></script>
+  <script src="libs/jszip.min.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+
 </html>

@@ -52,6 +52,12 @@ const filters = {
     type: /<p>(<strong>)?(Leadership|Military|Stewardship|Intrigue|Magic) - \w{3,15}(<\/strong>)?<\/p>/g,
     typeOnly: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
   },
+  damage: {
+    startOfCard: /<p>/g,
+    number: /<p>([0-9]+ )/g,
+    title: /(&ldquo;)(.*)(&rdquo;)/g,
+    flavour: /(<em>.+<\/em>)(?=\.?<\/p>)/g,
+  },
 };
 
 // Apply useful filters and return an array of each card's innerHTML
@@ -96,6 +102,23 @@ function applyDecreeFilters(str = "") {
     if (!flavour) return;
     const alts = flavour[0].replace(fd.emTags, "").split("|");
     alts.forEach((alt) => cards.push(inner.replace(fd.flavour, `$1${alt}$2`)));
+  });
+  return cards;
+}
+
+function applyDamageFilters(str = "") {
+  const fd = filters.damage;
+  const newStr = str
+    .replace(fd.number, "<p>")
+    .replace(fd.title, "<strong>$2</strong>")
+    .replace(fd.startOfCard, "!!BREAK!!");
+
+  console.log(newStr);
+  // Split each card to separate string in array
+  const cards = [];
+  newStr.split("!!BREAK!!").forEach((inner) => {
+    const flavour = inner.match(fd.flavour);
+    cards.push(inner.replace(fd.flavour, `<p>$1</p>`));
   });
   return cards;
 }
@@ -180,6 +203,10 @@ function generateCards(content, type) {
     applySkillFilters(content).forEach((inner) => {
       createCard(inner);
     });
+  else if (type === "damage")
+    applyDamageFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
 }
 
 // Convert each card to png and download
@@ -207,6 +234,7 @@ function updateCardType() {
     event: events,
     decree: decrees,
     skill: skills,
+    damage: "",
   };
   document.getElementById("inner-contents").value = contentMap[newType];
 }
