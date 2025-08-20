@@ -48,14 +48,14 @@ const filters = {
     fuckSpaces: /<p><br \/><br \/><\/p>/g,
     number: /[0-9](&amp;[0-9])?:/g,
     startOfCard: /<p>[0-9](&amp;[0-9])?:/g,
-    title: /(?<=[0-9]: )([\w ]+) - /g,
+    title: /(?<=[0-9]: )([\w/(/) ]+) - /g,
     type: /<p>(<strong>)?(Leadership|Military|Stewardship|Intrigue|Magic) - \w{3,15}(<\/strong>)?<\/p>/g,
     typeOnly: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
   },
   damage: {
     startOfCard: /<p>/g,
     number: /<p>([0-9]+ )/g,
-    title: /(&ldquo;)(.*)(&rdquo;)/g,
+    title: /&ldquo;(.*)&rdquo;/g,
     flavour: /(<em>.+<\/em>)(?=\.?<\/p>)/g,
   },
 };
@@ -110,7 +110,7 @@ function applyDamageFilters(str = "") {
   const fd = filters.damage;
   const newStr = str
     .replace(fd.number, "<p>")
-    .replace(fd.title, "<strong>$2</strong>")
+    .replace(fd.title, "<strong>$1</strong>")
     .replace(fd.startOfCard, "!!BREAK!!");
 
   console.log(newStr);

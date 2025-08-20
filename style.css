@@ -401,3 +401,20 @@ label {
   display: inline;
   content: ":";
 }
+
+.damage {
+  .content strong:first-child::after {
+    width: 100%;
+    opacity: 80%;
+    display: block;
+    content: url("./imgs/separator.svg");
+    transform: scale(0.5);
+    margin-top: 12rem;
+    margin-bottom: -1.25rem;
+  }
+
+  em {
+    display: block;
+    margin-top: 1rem;
+  }
+}
