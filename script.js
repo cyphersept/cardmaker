@@ -14,9 +14,9 @@ const filters = {
   event: {
     // separateCard: /<p>[\S\s]*(?=<p>[\S\s]*<strong>.*:<\/strong>)/g,
     // title: /<p><strong>.*<\/strong>/g,
-    // flavor: /(?:strong>)<em>.*<\/em>/g,
+    // flavour: /(?:strong>)<em>.*<\/em>/g,
     activate: /Activate [\w ,]{9,60}\./,
-    checks: /([0-9]+) .{0,60}(Test|Check)/g,
+    checks: /([0-9]+) .{0,200}(Test|Check)/,
     conditions:
       /(?<=\>( ?|Activate.*))(Revealer Choice|Council Vote|Regent Choice)[:.-]?/g,
     damage: /Damage!/g,
@@ -37,7 +37,7 @@ const filters = {
     damage: /Damage!/g,
     emTags: /(<em>|<\/em>)/g,
     flavour: /(<em>).+(<\/em>)/,
-    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
+    startOfCard: /(<p>.*<strong)(>.*<\/strong>):?/g,
     types: /(Leadership|Military|Stewardship|Intrigue|Magic)/g,
   },
   skill: {
@@ -57,6 +57,26 @@ const filters = {
     number: /<p>([0-9]+ )/g,
     title: /&ldquo;(.*)&rdquo;/g,
     flavour: /(<em>.+<\/em>)(?=\.?<\/p>)/g,
+  },
+  monster: {
+    action: /Action:/g,
+    damage: /Damage!/g,
+    end: /<p><br \/><br \/><\/p>/g,
+    flavour: /(<em>).+(<\/em>)(?=\.?<\/p>)/g,
+    fuckColons: /:/g,
+    fuckSpaces: /<p><br \/><br \/><\/p>/g,
+    fuckDashes: / ?- ?(&nbsp;)?/g,
+    shortenSpawn: /<\/p>\n?<p><strong>(Spawn)<\/strong>/g,
+    monsterAbility: /Monster Ability ?<\/strong> ?<em>(.*?)<\/em>/g,
+    lootItalics: /(Loot<\/strong><em>)(A Claim Refuted ?<\/em>)/g,
+    itemInfo: /(the item <strong>.*?<\/strong>)(.*\S)<\/em>/g,
+    startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
+  },
+  item: {
+    startOfCard: /<p>/g,
+    action: /Action:/g,
+    damage: /Damage!/g,
+    fuckColons: /:/g,
   },
 };
 
@@ -81,7 +101,11 @@ function applyEventFilters(str = "") {
     .replace(f.startOfCard, "!!BREAK$&");
 
   // Split each card to separate string in array
-  const cards = newStr.split("!!BREAK");
+  const cards = newStr
+    .split("!!BREAK")
+    .map((card) =>
+      card.replace(f.checks, "<label class='check' data-diff='$1'>$&</label>"),
+    );
   return cards;
 }
 
@@ -93,13 +117,15 @@ function applyDecreeFilters(str = "") {
     .replace(fd.damage, "<b>$&</b>")
     .replace(fd.types, "<label class='type $&'>$&</label>")
     .replace(fd.checks, "<label class='check' data-diff='$1'>$&</label>")
-    .replace(fd.startOfCard, "!!BREAK$&");
+    .replace(fd.startOfCard, "!!BREAK$1 class='ribbon'$2");
 
   // Split each card to separate string in array
   const cards = [];
   newStr.split("!!BREAK").forEach((inner) => {
     const flavour = inner.match(fd.flavour);
     if (!flavour) return;
+
+    // Create variants of each card for different alt flavour text
     const alts = flavour[0].replace(fd.emTags, "").split("|");
     alts.forEach((alt) => cards.push(inner.replace(fd.flavour, `$1${alt}$2`)));
   });
@@ -163,12 +189,49 @@ function applySkillFilters(str = "") {
               .replace(fs.flavour, `<em class="flavour">${alt}$2`)
               .replace(fs.end, `<label data-value=${n}> </label>$&`)
               .replace(/!!INSERTTYPE/g, typeHTML)
-              .replace(fs.number, "")
-          )
+              .replace(fs.number, ""),
+          ),
         );
       });
     });
   });
+  return cards;
+}
+
+function applyMonsterFilters(str = "") {
+  const fm = filters.monster;
+  // Adds useful tags to keywords
+  const newStr = str
+    .replace(fm.fuckColons, "")
+    .replace(fm.fuckDashes, "")
+    .replace(fm.action, "<b>$&</b>")
+    .replace(fm.damage, "<b>$&</b>")
+    .replace(fm.monsterAbility, "$1</strong> ") //removes "monster ability" label
+    .replace(fm.shortenSpawn, " | Spawn:") // adds spawn onto info line
+    .replace(fm.lootItalics, "$1 $2 - ") // adds space to italicized loot
+    .replace(fm.itemInfo, "$1<label hidden>$2</label></em>. ")
+    .replace(fm.end, "!!BREAK$&")
+    .replace(fm.fuckSpaces, "");
+
+  // Split each card to separate string in array
+  const cards = newStr.split("!!BREAK");
+
+  return cards;
+}
+
+function applyItemFilters(str = "") {
+  const fi = filters.item;
+  // Adds useful tags to keywords
+  const newStr = str
+    .replace(fi.fuckColons, "")
+    .replace(fi.fuckDashes, "")
+    .replace(fi.action, "<b>$&</b>")
+    .replace(fi.damage, "<b>$&</b>")
+    .replace(fi.startOfCard, "!!BREAK$&");
+
+  // Split each card to separate string in array
+  const cards = newStr.split("!!BREAK");
+
   return cards;
 }
 
@@ -180,7 +243,7 @@ function createCard(inner) {
 
   card.classList = "card";
   img.classList = "bg";
-  content.classList = "content";
+  content.classList = inner.length > 1700 ? "lengthy content" : "content";
   content.innerHTML = inner;
 
   card.appendChild(img);
@@ -207,6 +270,14 @@ function generateCards(content, type) {
     applyDamageFilters(content).forEach((inner) => {
       createCard(inner);
     });
+  else if (type === "monster")
+    applyMonsterFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
+  else if (type === "item")
+    applyItemFilters(content).forEach((inner) => {
+      createCard(inner);
+    });
 }
 
 // Convert each card to png and download
@@ -224,7 +295,7 @@ function downloadAllCards() {
   Promise.all(zipArr).then(() =>
     zip.generateAsync({ type: "blob" }).then((content) => {
       saveAs(content, name + ".zip");
-    })
+    }),
   );
 }
 
@@ -235,6 +306,8 @@ function updateCardType() {
     decree: decrees,
     skill: skills,
     damage: "",
+    monster: monsters,
+    item: items,
   };
   document.getElementById("inner-contents").value = contentMap[newType];
 }

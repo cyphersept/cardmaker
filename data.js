@@ -262,3 +262,213 @@ const skills = `<p>Leadership - Yellow</p>
 <p>*Military - &lsquo;Nudge&rsquo; - Play when you roll a die: Add +1 or -1 to the result.</p>
 <p>3&amp;4: Channel Reserves - Action: Roll a d10. 1-5: Gain Nothing. 6-7: Gain 1 Mana. 8-9: Gain 2 Mana. 10: Gain 3 Mana. <em>We&rsquo;re going to need every last mote of power we can get.</em></p>
 <p>5: Flexible Casting - Play when a Skill Test occurs: Choose a Skill Type. All Cards of this type are treated as positive/beneficial for this Skill Test. <em>X</em> | <em>X</em> | <em>X</em>.</p>`;
+
+const monsters = `<p><strong>Siege Tower </strong>- <em>The lumbering siege tower, crewed by a motley lot of invading bandits, is of little threat of its own, but permits the treasonous masses direct access to the Wall while shielding those hiding beneath its hatched shell, whereupon their impotent shouts and curses become a far more deadly threat.</em></p>
+<p>2HP | 1 Dice | 7+</p>
+<p><strong>Spawn</strong>: N/A</p>
+<p><strong>Activation</strong>: Moves normally, can attack the castle.</p>
+<p><strong>Monster Ability</strong>: <em>Siege Engine </em>- Allows Bandits in the same &lsquo;Near&rsquo; Section as it to attack the Castle.</p>
+<p><strong>Monster Ability</strong>: <em>Barricades</em> - The Siege Tower automatically cancels 1 hit made against Besiegers in its Section, though will not cancel the last/only Attack made against them.</p>
+<p><strong>Loot</strong>: The first time a Siege Tower is destroyed, the slayer in the same Section gains the item <strong><em>Fortified Thatching</em></strong>: <em>When a Room you are would be Damaged, discard this item to negate the Damage.</em></p>
+<p><br /><br /></p>
+<p><strong>The Lich </strong>- <em>Bringer of the plague of undeath roving through the lands, an opportunistic vulture who thrives off the misery and chaos of war, exasperating the strife like an infection in a wound. They are more than content to patiently await their enemies' downfalls - do not hesitate to destroy this creature, or else find yourself awash in bloody history.</em></p>
+<p>1HP| 2 Dice | 9+</p>
+<p><strong>Spawn</strong>: Far Mountain (Woods)</p>
+<p><strong>Activation</strong>: Doesn&rsquo;t Move. Attacks Armies in section normally.</p>
+<p><strong>Monster Ability</strong>: <em>Lord of Bones - </em>Roll a d10 whenever a Bandit, Non-Skeleton Monster, Sallied Forth Army, or War Machine is killed. On a 3+, replace the destroyed unit with a Skeleton Token.</p>
+<p><strong>Monster Ability</strong>: <em>Weaver of Necromantic Rites -</em> If there are no Armies in its section when activated, place a Skeleton Token in its Section. Whenever the Lich destroys an Army, replace it with a Skeleton without rolling.</p>
+<p><strong>Loot</strong>: The first time The Lich is (fully) destroyed, the slayer in the same Section gains the item <strong><em>Amulet of Souls</em></strong><em>: Whenever an Army in your Section is destroyed, you may roll a die. On a 3+, a new Army appears in Reserves. On a 1-2, become Wounded, and spawn the Lich and a Skeleton Token in that Section.</em></p>
+<p><br /><br /></p>
+<p><strong>Skeleton Tokens</strong></p>
+<p>1 HP | 1 Dice | 7+</p>
+<p><strong>Activation</strong>: Does not Move. Attacks Armies in its Section. Does not Attack the Castle unless in a Near Section and a Siege Tower is present.</p>
+<p><strong>Monster Ability</strong>: <em>Unliving Phyllactery - </em>Whenever The Lich would die by any means (or is otherwise not present on the board), replace a random Skeleton Token with The Lich, prioritizing Sections with no Armies or Counselors present. The Lich is not considered to be Destroyed/Defeated until it and all Skeletons are defeated.</p>
+<p><br /><br /></p>
+<p><strong>The Zubbenhowzer Cannon Team</strong> - <em>The Bardok Kingdoms, that troublesome coalition of mountain lords still clinging to long past days of glory and riches, have come across a relic of their ancestors, excavated from one of their great necropolises beneath the earth, or else sequestered it away until this day where it could bring us ruin. The ground quakes with each thunderous belch, each ashen jut of fire erupting from that metallic beast&rsquo;s bale mouth. Destroy it, no matter the cost, lest this contraption of steel and flame bring a dishonorable end to the age of stone walls and stout hearts.&nbsp;</em></p>
+<p>2HP | 2 Dice | 4+</p>
+<p><strong>Spawn</strong>: Far Mountain</p>
+<p><strong>Activation</strong>: Doesn&rsquo;t move. Only attacks the Castle, even when Armies are present in its Tile.&nbsp;</p>
+<p><strong>Monster Ability</strong>: <em>Unstable Creation | Last Roar of the Dragonslayer - </em>When it dies it explodes, destroying all Armies and Besiegers in the same section as it.</p>
+<p><strong>Monster Ability</strong>: <em>Siegebreaker</em> - Damage inflicted by the <em>Zubbenhowzer </em>does not draw a <em>Damaged!</em> Card, instead directly removing HP from the Wall.</p>
+<p><strong>Loot</strong>: The first time The Zubbenhowzer Cannon Team is destroyed, the slayer in the same Section gains the item <strong><em>Powder &amp; Ashes</em></strong><em>: Whenever an Army in your Section is destroyed, it may immediately attack, and does so as if you were Leading it.</em> If the Cannon Team was destroyed by an Army attack, also gain the item <strong><em>Insane Bravado: </em></strong><em>Armies you lead gain +1 to hit when in the same Section as a Monster.</em></p>
+<p><br /><br /></p>
+<p><strong>Fire Drake </strong>- <em>High in the Durnholm Mountains, an ancient threat stirs; a great wyrm, a creature of fire made flesh. Though young, this flamekin is the heir of the beasts which cast down the golden age of the Highland Empire, and permitted our own Kingdom&rsquo;s eastern expansion. Be weary! The Drake&rsquo;s flame burns hot, hot enough to melt steel and stone alike, and there is the vicious cunning of an apex predator lurking within that abominable wyrm.</em></p>
+<p>5HP | 5 Dice | 7+</p>
+<p><strong>Spawn</strong>: Far Mountains</p>
+<p><strong>Activation</strong>: Moves up to 2 Sections to attack the biggest Army, ignoring zone of control, prioritizing the furthest Army away, randomized or chosen by a revealed Traitor in the event of a tie. If No Armies are in range, moves to its current Quadrant&rsquo;s Near Section and Attacks the Castle Directly.</p>
+<p><strong>Monster Ability</strong>: <em>Conflagration </em>- Any excess hits against Armies in a Section inflicts <em>Damage!</em> on the Castle.</p>
+<p><strong>Monster Ability</strong>: <em>Skybound Cataclysm - </em>The Drake attacks Armies it flies over while moving.</p>
+<p><strong>Monster Ability</strong>: <em>Apex Predator - </em>The Drake ignores Zone of Control and can travel from the Near Beach to the Near Plains, and the Near Mountains and Near Woods, and vice versa. While at 2 or 1HP, the Drake changes its Activation to instead move to the Distant Mountains as directly as possible. Whenever it is Activated while in the Distant Mountains, it will move to Attack any Armies in the Mountain Quadrant (prioritizing the Near Mountains), then fly back to the Distant Mountains, regardless of distance.</p>
+<p><strong>Loot</strong>: The first time The Fire Drake is destroyed, the slayer in the same Section gains the item <strong><em>Dragonbone Standard: </em></strong><em>All units in your Section gain +1 to hit. </em>If the Fire Drake was slain in the Distant Mountains, also gain +2 Treasury.</p>
+<p><br /><br /></p>
+<p><strong>Ogre </strong>- <em>A brutish and vicious beast, the Ogre is a territorial predator by nature. No doubt driven into a frenzy by some fiendish art of our western foes, the uncivilized thug is as deadly a threat as they come, nigh-impervious to lone adventurers or even small bands of soldiers due to its disgustingly resilient hide and regenerative power fueled by the very life-essence of those sentient creatures it devours. Bring an end to this threat which has for too long plagued our fair forests, and slain many an innocent traveler.</em></p>
+<p>3HP | 3 Dice | 4+</p>
+<p><strong>Spawn</strong>: Far Woods</p>
+<p><strong>Activation</strong>: Moves and attacks normally.</p>
+<p><strong>Monster Ability</strong>: <em>Regenerating Skin - </em>Whenever the Ogre kills an Army or Damages the Castle, it heals 1 missing HP.&nbsp;</p>
+<p><strong>Monster Ability</strong>: <em>Thick Hide</em> - The Ogre ignores the first hit allocated to it each Attack.</p>
+<p><strong>Monster Ability</strong>: <em>Devoured - </em>When a Councilor is Wounded by the Ogre, they discard all cards in their hand.</p>
+<p><strong>Loot:</strong> The first time The Ogre is destroyed, the slayer gains the item <strong><em>Ogreskin Armor: </em></strong><em>You cannot become Wounded, moving to the Porticullus Gate if Sallied Forth without an attached Army remaining. Cancel 1 hit made against Armies in your Section per turn. You cannot gain additional Moves or Actions on your turn while wearing this. </em>If a Councilor was Devoured by the Ogre, also gain +2 Supplies.</p>
+<p><br /><br /></p>
+<p><strong>Colossus </strong>- <em>A titanic legend out of the pages of myth, the Colossus is the last of its kind, its forefathers and kin having perished to a lone warrior back in the age of legend. It had also long been thought slain, but instead appears to have lied dormant beneath the earth for aeons until it has awoken in this darkening age. Cast it down, lest the shadow of this primeval titan fall upon our walls.</em></p>
+<p>8HP | 3 Dice | 8+</p>
+<p><strong>Spawns</strong>: Far Plains</p>
+<p><strong>Activation</strong>: Moves and attacks normally.</p>
+<p><strong>Monster Ability</strong>: <em>Colossal Shadow - </em>The Colossus can always be targeted by attacks, regardless of other Enemy Units.In turn, The Colossus must be targeted by attacks if possible; hits cannot be allocated to other Besiegers while the Colossus is present in the same Section.</p>
+<p><strong>Monster Ability</strong>: <em>Force of Nature - </em>Whenever the Colossus produces a hit, it counts as two hits made for damage purposes. The Colossus requires 2 Hits to be allocated to it to lose 1HP.</p>
+<p><strong>Monster Ability</strong>: <em>Living Rampart</em> - Allows Bandits in the same &lsquo;Near&rsquo; Section to Attack the Castle.</p>
+<p><strong>Loot</strong>: The first time The Colossus is destroyed, the slayer gains the item <strong><em>Living Fortifications.</em></strong><em> The Wall gains +1 Max HP. Besiegers who roll a 1 when attacking the Castle suffer 1 Damage. -1 Start-of-Turn draw to the bearer of this item.</em></p>
+<p><br /><br /></p>
+<p><strong>The Limencello</strong> - <em>No fiercer band of pirates, no more infamous a ship roams the seven seas than The Limencello, whose buccaneers and brigands are notorious for the most daring and dastardly of raids, even stealing treasure-barges out from the middle of war fleets. Now, it seems, they have come to raid our own coffers, braving through a warzone to do so.</em></p>
+<p>3HP | 2 Dice | 5+</p>
+<p><strong>Spawn</strong>: Far Beach.&nbsp;</p>
+<p><strong>Activation</strong>: Doesn&rsquo;t move. Attacks the Castle unless Armies are in its section, in which case it attacks them normally.</p>
+<p><strong>Monster Ability:</strong><em>Raiders of the Savage Seas </em>- Any time <em>The Limencello</em> would inflict <em>Damage!</em> on the Castle, <em>The Limencello</em> instead steals two Resources, each randomly chosen, and spawns a Pirate in its Section.</p>
+<p><strong>Monster Ability:</strong><em>Repel Boarders!</em> -Whenever any number of Armies enters the Limencello&rsquo;s Section, spawn 3 Pirates in its Section. When the Limencello is Activated, if any Armies are in its Section, spawn 3 Pirates in its Section (they can act immediately).</p>
+<p><strong>Monster Ability:</strong><em>Undying Legend</em> - At the start of the next Ritual Tier after it was destroyed, <em>The Limencello</em> reappears in a random Far Section it has not appeared in before. If the Councilor bearing <em>Treasures of the World</em> is Wounded while <em>The Limencello</em> is on the battlefield, it reclaims the Item and must be looted again.</p>
+<p><strong>Loot</strong>: The first time The Limencello is destroyed, the slayer gains the item <strong><em>Treasures of the World: </em></strong><em>Grants +1 of each Resource. The bearer gains +1 start of turn draw in any skillset of choice.</em></p>
+<p><br /><br /></p>
+<p><strong>Pirate Tokens</strong></p>
+<p>1 HP | 1 Dice | 7+</p>
+<p><strong>Activation</strong>: Moves and Attacks normally, but three Pirates will stay behind with <em>The Limencello</em>, not moving. Cannot attack the Castle directly, but will (collectively, but separate from any Bandits) build a Siege Tower when activated in a Near Section.</p>
+<p><strong>Monster Ability</strong>: <em>Plundering Party - </em>Pirates steal 1 resource at random instead of inflicting Damage whenever they attack the Castle.</p>
+<p><strong>Monster Ability</strong>: <em>Loot &amp; Run </em>- When <em>The Limoncello</em> is destroyed, all remaining Pirates are removed. When the Limencello returns, all removed Pirates reappear with it in the same Far Section.</p>
+<p><br /><br /></p>
+<p><strong>Wraith </strong>-&nbsp;</p>
+<p>1HP | 1 Dice | 8+</p>
+<p><strong>Spawn</strong>: In the Section with the most Besiegers, or else the Far Woods.</p>
+<p><strong>Activation:</strong> Teleports to the Section with the most number of Besiegers/Enemies. Otherwise, does not move.</p>
+<p><strong>Monster Ability:</strong><em>Aura of Dread</em> - All Armies in the Wraith&rsquo;s section have -1 to hit.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Ethereal - </em>Can only be hit/have a hit allocated to it if the result was a natural 10 (all other rules of allocation/targeting still apply).</p>
+<p><strong>Monster Ability:</strong><em>The Slowest Terror </em>- Whenever The Wraith destroys an Army, increase the effect of <em>Aura of Dread </em>(-2, -3, etc).</p>
+<p><strong>Loot:</strong> The first time The Wraith is destroyed, the slayer gains the item <strong><em>Cloak of Mists: </em></strong><em>The wearer can travel to any room when moving between locations by discarding a skill card from their hand, or may Sally Forth or Return to Keep from/to any Near Section by doing the same.</em></p>
+<p><br /><br /></p>
+<p><strong>The Thing In The Dark</strong> - <em>&ldquo;&hellip;And so the Thing in the Dark brought an end to our hero&rsquo;s lark, devouring him whole without even a bark; Now the lesson I hope you&rsquo;ll agree is so plain to see, to never trust a stranger - or even three!, for only you can face your fears while they&rsquo;re still small, face them before they have the chance to grow big and tall; when you&rsquo;re all alone, lost in the dark.&rdquo;</em></p>
+<p>3HP | 0 Dice | 11+</p>
+<p><strong>Spawn:</strong> Far Mountains</p>
+<p><strong>Activation:</strong> Does not Move. Attacks Armies in its section.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Cascading Terror </em>- Increase the difficulty of Crises (Pass and Partial Pass Tiers) drawn by 1.</p>
+<p><strong>Monster Ability:</strong><em>Fear Unfaced</em> - If The Thing In The Dark cannot Attack when Activated, increase its HP and the effect of its <em>&ldquo;Cascading Terror&rdquo; </em>ability by 1.</p>
+<p><strong>Monster Ability:</strong><em>Sweeping Hysteria </em>- Gains +1 die and +1 to hit rolls for each Army and Counselor in its Section.&nbsp;</p>
+<p><strong>Loot:</strong> The first time The Thing In The Dark is destroyed, the slayer in the same Section (or else it drops in that Section) gains the item <strong><em>Hamartia Overcome</em></strong><em>: You may ignore the effects of your Flaw.</em></p>
+<p><br /><br /></p>
+<p><strong>The Changeling&nbsp;</strong></p>
+<p>2HP | 1 Dice | 6+</p>
+<p><strong>Spawn:</strong> In the Section with the most Besiegers <em>or</em> the Far Woods.</p>
+<p><strong>Activation:</strong> Moves to the adjacent section with the most number of Besiegers, or randomly between them on ties. If there are no adjacent Sections with Besiegers, moves to an adjacent Section with no Armies further away from the closest Army than its Section, randomly on ties. Otherwise, does not move. The Changeling cannot Attack the Castle unless a Siege Tower is present in its (Near) Section.</p>
+<p><strong>Monster Ability:</strong><em>Trickster</em> - When Activated, draw and resolve the top card of the Crisis Deck. If possible, its difficulty (overall and tiers) is increased by 3.</p>
+<p><strong>Monster Ability:</strong><em>Mischievous Meddler </em>- All Skill Tests draw an additional Chance Card from the Fate Deck while The Changeling is alive.</p>
+<p><strong>Monster Ability:</strong><em>Cunning Master of Deceit </em>- Attack rolls of 1 reflect and inflict a hit on the Army. The Changeling cannot be targeted by the Ballista (though excessive hits may still spillover and damage it).</p>
+<p><strong>Loot:</strong> The first time The Changeling is destroyed, the slayer gains the item <strong><em>Parabolic Mirror: </em></strong><em>As an Action, discard this Item to create a second copy of your Councilor. This Clone Councilor has their own turn, including card draw, actions, and moves which you control, but also has their own Crisis Phase. This Clone vanishes at the end of the current Ritual Tier, or when Wounded.</em></p>
+<p><br /><br /></p>
+<p><strong>The Kraken</strong> - [spawns with two tentacles]</p>
+<p>5HP | X Dice | 8+</p>
+<p><strong>Spawn:</strong> The Far Beach</p>
+<p><strong>Activation:</strong> Doesn&rsquo;t Move. Attacks Armies in its Section.</p>
+<p><strong>Monster Ability:</strong><em>From the Darkest Depths </em>- When the Kraken Attacks Armies in its Section, it hits on a 4+ and rolls one die for each Tentacle it has.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Boundless Emergence</em> - Each time the Kraken is Activated, spawn two additional Tentacle Tokens before resolving the Kraken&rsquo;s Attacks.</p>
+<p><strong>Monster Ability:</strong><em>Monstrous Reach - </em>When activated, if no Armies are present in its Section, the Kraken attacks the Castle, rolling 1 Die for each Tentacle it has.&nbsp;</p>
+<p><strong>Loot:</strong> The first time The Kraken is destroyed, the slayer gains the item <strong><em>Seabrine Ritual Tome:</strong> As an Action, choose a Monster in the same Section. Ignore the effects of one of their Monster Abilities until you use this Item again. </em>If the Kraken was slain with at least 5 Tentacles still alive, also gain +1 Mana and +1 Supplies.</p>
+<p><br /><br /></p>
+<p><strong>The Kraken&rsquo;s Tentacles Tokens</strong></p>
+<p>1HP | 1 Dice | X+</p>
+<p><strong>Activation:</strong> The Kraken&rsquo;s Tentacles act according to the Kraken&rsquo;s Rules. They do not move.</p>
+<p><strong>Monster Ability:</strong><em>Arms of Leviathan </em>- The Kraken&rsquo;s Tentacles Act in accordance with The Kraken&rsquo;s rules. If the Kraken is destroyed or otherwise removed, all Tentacles instantly die and are removed.</p>
+<p><strong>Monster Ability:</strong><em>Impeding Tendrils </em>- The Kraken&rsquo;s Tentacles will automatically take any untargeted damage/hits for the Kraken. (In other words, they are higher in the hit priority queue).</p>
+<p><br /><br /></p>
+<p><strong>Fungal Horror </strong>-&nbsp;</p>
+<p>3HP | 1 Dice | 8+</p>
+<p><strong>Spawn:</strong> Far Woods</p>
+<p><strong>Activation:</strong> Doesn&rsquo;t Move. Attacks Armies in its Section.</p>
+<p><strong>Monster Ability:</strong><em>Creeping Corruption</em> - When activated, create two new Fungal Creeper Tokens in up to two random adjacent Sections, prioritizing the Section(s) with the least Fungal Creeper Tokens. If no Armies are in its Section when Activated, spawn one additional Fungal Creeper Token in its Section.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Obscuring Brush</em> -Fungal Horror cannot be targeted or have hits allocated to it while there are any Fungal Creepers in its Section. Councilors &amp; Armies have -1 to hit while targeting any non-Fungal Horror/Creeper Besiegers in this Section.</p>
+<p><strong>Monster Ability:</strong><em>Growing Threat </em>- For every 2 Creepers on the Board, gain +1 to hit. For every 3 Creepers on the Board, gain +1 Combat Die.</p>
+<p><strong>Loot:</strong> The first time The Fungal Horror is destroyed, the slayer gains the item <strong><em>Flowering Briarheart: </em></strong><em>Place a Skill Card on this item (you may replace it once per turn, but must always have a card here). At any applicable time you may exhaust this item to resolve the Play effect of that Skill Card. Discard any Skill Cards with the same name the moment they enter your Hand. This item unexhausts whenever you draw (and do not discard) a Skill Card.</em> If there are no Fungal Creepers on the map when the Fungal Horror is destroyed, also gain the item <strong><em>Outpost Trading Caravans:</em></strong><em> Exhaust this item to gain +1 to a Resource of choice, and 3 Skillcards of any Skillset. This item is unexhausted each time you travel from the Distant Woods to the Porticullus Gate.</em></p>
+<p><br /><br /></p>
+<p><strong>Fungal Creeper Tokens</strong></p>
+<p>2HP | 1 Dice | 8+</p>
+<p><strong>Activation:</strong> Doesn&rsquo;t Move. If in a Near Section, can attack the Castle directly.</p>
+<p><strong>Monster Ability:</strong><em>Devouring Growth</em> - When activated, create a new Fungal Creeper in the adjacent Section with the least number of Fungal Creepers, randomly on ties. Creepers in Far Sections can only spread to Near Sections if every Far Section has at least one Creeper in it, and vice versa.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Creeping Threat -</em> For every 2 Creepers in a Section, they gain +1 to hit.</p>
+<p><strong>Monster Ability:</strong><em>Thick Roots</em> - Fungal Creepers count twice for the purposes of establishing Zone of Control. When the Fungal Horror is slain, all Fungal Creepers lose 1HP.&nbsp;</p>
+<p><br /><br /></p>
+<p><strong>The Black Knight&nbsp;</strong></p>
+<p>3HP | 3 Dice | 3+</p>
+<p><strong>Spawn:</strong> Far Plains.</p>
+<p><strong>Activation:</strong> Moves to an adjacent Section that contains a Counselor and Attacks, choosing the highest Military skillset then randomly if multiple options are available. If no adjacent Sections have a Counselor, moves to an adjacent Section with the most Armies and Attacks, randomly on ties or not at all if none are in range.</p>
+<p><strong>Monster Ability:</strong><em>Challenge Unanswered </em>- If there are no Armies in range of the Black Knight when it is Activated, lose -1 Loyalists. If this Activation was caused by the Black Knight being hit by a non-Army Attack, lose an additional -1 Loyalists.</p>
+<p><strong>Monster Ability:</strong><em>Counterstroke </em>- Once per turn, when a hit is produced but before it is allocated to any Besieger in the Black Knight&rsquo;s Quadrant, including the Black Knight themself, the Black Knight Activates.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Slayer of Champions </em>- The Black Knight rolls an additional die when Attacking for each Councilor in their Section.</p>
+<p><strong>Loot:</strong> The first time The Black Knight is destroyed, the slayer gains the item <strong><em>The Black Crown: </em></strong><em>The wearer may roll an additional die and gain +1 to hit when attacking for each unique Monster in their section, but every time you resolve an Attack with a Monster still in the Section, lose -1 Loyalists. If the Black Knight was slain by an Army led by a Councilor, then this item additionally grants +2 Military Skillset.</em></p>
+<p><br /><br /></p>
+<p><strong>The Hydra</strong></p>
+<p>10HP | 1 + X Dice | 7+</p>
+<p><strong>Spawn:</strong> Far Woods.</p>
+<p><strong>Activation:</strong> Moves and Attacks normally, can attack the castle.</p>
+<p><strong>Monster Ability:</strong><em>The Heads of the Hydra</em> - Rolls +1 die when attacking for each HP it is missing.</p>
+<p><strong>Monster Ability:</strong><em>Poisonous Blood </em>- Missed attacks made by Armies in the Hydra&rsquo;s Section are reflected, and deal a hit to the Army.</p>
+<p><strong>Monster Ability:</strong><em>Burning Bolts</em> - Hits inflicted against The Hydra by The Ballista or Spell(Firebolt) deal 2x damage.</p>
+<p><strong>Loot:</strong> The first time The Hydra is destroyed, the slayer gains the item <strong><em>Nessus&rsquo;s Bane:</em></strong><em> As an action, discard this item to destroy a single Monster in your Section. If the Burning Bolts ability was never utilized, then additionally gain the item </em><strong><em>Consolation Constellation: </em></strong><em>Once per Ritual Tier, you may exhaust this item to gain 1 Skillcard of any Skillset for each unique non-Token Monster slain this game.</em></p>
+<p><br /><br /></p>
+<p><strong>Warmech </strong>- <em>1/64. Or something like that.</em></p>
+<p>4HP | 1 Dice | 2+</p>
+<p><strong>Spawn:</strong> The Far Mountains</p>
+<p><strong>Activation:</strong> Warmech does not move, and always Attacks the Castle. <em>Multicore Omnipattern Targeting Schema</em> may result in Warmech attacking both Armies and the Castle simultaneously, so one die should be designated for the Castle before rolling.</p>
+<p><strong>Monster Ability:</strong><em>Multicore Omnipattern Targeting Schema</em> - Warmech rolls +1 die for each Army in its Section. Exactly one die is always targeted at the Castle, regardless of the number of Armies present (or not).</p>
+<p><strong>Monster Ability:</strong><em>Obsolete Hardware </em>- Warmech gains -1 to hit for each Army <em>and</em> Councilor in its Section.</p>
+<p><strong>Monster Ability:</strong><em>Preemptive Strike</em> - Whenever any number of Armies enter Warmech&rsquo;s Section for the first time each Round, Warmech immediately Activates.</p>
+<p><strong>Loot:</strong> The first time Warmech is destroyed, the slayer gains the item <strong><em>Skycastle Cannon Targeting Grid: </em></strong><em>As an Action, discard this item. Deal 5 Damage to all Units in the same Section as the bearer. This deals 1 less Damage for each Unit in the Section.</em></p>
+<p><br /><br /></p>
+<p><strong>The Conquerer </strong>-</p>
+<p>1HP | 1 Dice | 6+</p>
+<p><strong>Spawn:</strong> Far Beach.</p>
+<p><strong>Activation:</strong> Moves and Attacks normally. Cannot attack the Castle unless a Siege Tower is present in his Section.</p>
+<p><strong>Monster Ability:</strong><em>Root of a Legend </em>- All Besiegers gain +1 to their Attack rolls in his Quadrant.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Burning the Ships </em>- After The Conqueror is Activated for the first time, spawn 3 Bandits and a War Machine in the Far Beach. Each time after, spawn 1 Bandit.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>End of the Age of Conquest - </em>The first time The Conqueror is slain, gain +1 Loyalists.</p>
+<p><strong>Loot:</strong><em>A Claim Refuted </em>- If all other Claimants to the Throne have been defeated, gain an additional +2 Loyalists.</p>
+<p><br /><br /></p>
+<p><strong>The Elven Prince </strong>-&nbsp;</p>
+<p>1HP | 1 Dice | 6+</p>
+<p><strong>Spawn:</strong> Far Beach.</p>
+<p><strong>Activation:</strong> Moves and Attacks normally. Cannot attack the Castle unless a Siege Tower is present in her Section.</p>
+<p><strong>Monster Ability:</strong><em>The Defiant Scion </em>- All Besiegers gain +1 to their Attack rolls in her Quadrant.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Fey Magicks or Homefield Knowledge </em>- All Armies have -2 to their Attack rolls while in the Woods Quadrant.</p>
+<p><strong>Monster Ability:</strong><em>The March of Time, Undeterred </em>- When this Monster is slain, gain +1 Loyalists.</p>
+<p><strong>Loot:</strong><em>A Claim Refuted </em>- If all other Claimants to the Throne have been defeated, gain an additional +2 Loyalists.</p>
+<p><br /><br /></p>
+<p><strong>The Mountain Lord</strong> -</p>
+<p>1HP | 1 Dice | 6+</p>
+<p><strong>Spawn:</strong> Far Mountain.</p>
+<p><strong>Activation:</strong> Moves and Attacks normally. Cannot attack the Castle unless a Siege Tower is present in his Section.</p>
+<p><strong>Monster Ability:</strong><em>Dreams of a Resurgent Empire </em>- All Besiegers gain +1 to their Attack rolls in his&nbsp;</p>
+<p>Quadrant.</p>
+<p><strong>Monster Ability:</strong><em>Garnering Support </em>- Each time an Army is slain in the Mountain Quadrant or a Besieger in the Mountain Quadrant inflicts Damage, spawn 1 Bandit in the Far Mountains. Each time a Councilor is Wounded in the Quadrant or the Wall is cracked, also spawn a War Machine.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>Vengeance Denied </em>- When this Monster is slain, gain +1 Loyalists.</p>
+<p><strong>Loot:</strong><em>A Claim Refuted </em>- If all other Claimants to the Throne have been defeated, gain an additional +2 Loyalists.</p>
+<p><br /><br /></p>
+<p><strong>The Outlaw King</strong> -&nbsp;</p>
+<p>1HP | 1 Dice | 6+</p>
+<p><strong>Spawn:</strong> Far Plains.</p>
+<p><strong>Activation:</strong> Moves and Attacks normally. Cannot attack the Castle unless a Siege Tower is present in her Section.</p>
+<p><strong>Monster Ability:</strong><em>Folk Hero </em>- All Besiegers in her Quadrant gain +1 to their Attacks.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>The Legend Lives On </em>- After this Monster is slain, all Besiegers gain +1 to their Attacks for the remainder of this Ritual Tier and spawn 4 Bandits in each Far Section.&nbsp;</p>
+<p><strong>Monster Ability:</strong><em>There lies the Gentleman</em> - When this Monster is slain, gain +1 Loyalists.&nbsp;</p>
+<p><strong>Loot:</strong><em>A Claim Refuted </em>- If all other Claimants to the Throne have been defeated, gain an additional +2 Loyalists.</p>`;
+const items = `<p><strong>Fortified Thatching</strong>: When a Room you are would be Damaged, discard this item to negate the Damage.</p>
+<p><strong>Amulet of Souls</strong>: Whenever an Army in your Section is destroyed, you may roll a die. On a 3+, a new Army appears in Reserves. On a 1-2, become Wounded, and spawn the Lich and a Skeleton Token in that Section.</p>
+<p><strong>Powder &amp; Ashes</strong>: Whenever an Army in your Section is destroyed, it may immediately attack, and does so as if you were Leading it.</p>
+<p><strong>Insane Bravado: </strong>Armies you lead gain +1 to hit when in the same Section as a Monster.</p>
+<p><strong>Dragonbone Standard: </strong>All units in your Section gain +1 to hit. If the Fire Drake was slain in the Distant Mountains, also gain +2 Treasury.</p>
+<p><strong>Ogreskin Armor: </strong>You cannot become Wounded, moving to the Porticullus Gate if Sallied Forth without an attached Army remaining. Cancel 1 hit made against Armies in your Section per turn. You cannot gain additional Moves or Actions on your turn while wearing this. If a Councilor was Devoured by the Ogre, also gain +2 Supplies.</p>
+<p><strong>Living Fortifications.</strong> The Wall gains +1 Max HP. Besiegers who roll a 1 when attacking the Castle suffer 1 Damage. -1 Start-of-Turn draw to the bearer of this item.</p>
+<p><strong>Treasures of the World: </strong>Grants +1 of each Resource. The bearer gains +1 start of turn draw in any skillset of choice.</p>
+<p><strong>Cloak of Mists: </strong>The wearer can travel to any room when moving between locations by discarding a skill card from their hand, or may Sally Forth or Return to Keep from/to any Near Section by doing the same.</p>
+<p><strong>Hamartia Overcome</strong>: You may ignore the effects of your Flaw.</p>
+<p><strong>Parabolic Mirror: </strong>As an Action, discard this Item to create a second copy of your Councilor. This Clone Councilor has their own turn, including card draw, actions, and moves which you control, but also has their own Crisis Phase. This Clone vanishes at the end of the current Ritual Tier, or when Wounded.</p>
+<p><strong>Seabrine Ritual Tome: </strong>As an Action, choose a Monster in the same Section. Ignore the effects of one of their Monster Abilities until you use this Item again. If the Kraken was slain with at least 5 Tentacles still alive, also gain +1 Mana and +1 Supplies.</p>
+<p><strong>Flowering Briarheart: </strong>Place a Skill Card on this item (you may replace it once per turn, but must always have a card here). At any applicable time you may exhaust this item to resolve the Play effect of that Skill Card. Discard any Skill Cards with the same name the moment they enter your Hand. This item unexhausts whenever you draw (and do not discard) a Skill Card.</p>
+<p><strong>Outpost Trading Caravans:</strong> Exhaust this item to gain +1 to a Resource of choice, and 3 Skillcards of any Skillset. This item is unexhausted each time you travel from the Distant Woods to the Porticullus Gate.</p>
+<p><strong>The Black Crown: </strong>The wearer may roll an additional die and gain +1 to hit when attacking for each unique Monster in their section, but every time you resolve an Attack with a Monster still in the Section, lose -1 Loyalists. If the Black Knight was slain by an Army led by a Councilor, then this item additionally grants +2 Military Skillset.</p>
+<p><strong>Nessus&rsquo;s Bane:</strong> As an action, discard this item to destroy a single Monster in your Section. If the Burning Bolts ability was never utilized, then additionally gain the item <strong>Consolation Constellation: </strong>Once per Ritual Tier, you may exhaust this item to gain 1 Skillcard of any Skillset for each unique non-Token Monster slain this game.</p>
+<p><br /><strong>Skycastle Cannon Targeting Grid: </strong>As an Action, discard this item. Deal 5 Damage to all Units in the same Section as the bearer. This deals 1 less Damage for each Unit in the Section.</p>`;
