@@ -69,7 +69,7 @@ const filters = {
     shortenSpawn: /<\/p>\n?<p><strong>(Spawn)<\/strong>/g,
     monsterAbility: /Monster Ability ?<\/strong> ?<em>(.*?)<\/em>/g,
     lootItalics: /(Loot<\/strong><em>)(A Claim Refuted ?<\/em>)/g,
-    itemInfo: /(the item <strong>.*?<\/strong>)(.*\S)<\/em>/g,
+    itemInfo: /(the item <strong>.*?<\/strong>)( ?<em>.*?<\/em>)/g,
     startOfCard: /<p>.*<strong>.*<\/strong>:?/g,
   },
   item: {

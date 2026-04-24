@@ -408,7 +408,7 @@ const monsters = `<p><strong>Siege Tower </strong>- <em>The lumbering siege towe
 <p><strong>Monster Ability:</strong><em>The Heads of the Hydra</em> - Rolls +1 die when attacking for each HP it is missing.</p>
 <p><strong>Monster Ability:</strong><em>Poisonous Blood </em>- Missed attacks made by Armies in the Hydra&rsquo;s Section are reflected, and deal a hit to the Army.</p>
 <p><strong>Monster Ability:</strong><em>Burning Bolts</em> - Hits inflicted against The Hydra by The Ballista or Spell(Firebolt) deal 2x damage.</p>
-<p><strong>Loot:</strong> The first time The Hydra is destroyed, the slayer gains the item <strong><em>Nessus&rsquo;s Bane:</em></strong><em> As an action, discard this item to destroy a single Monster in your Section. If the Burning Bolts ability was never utilized, then additionally gain the item </em><strong><em>Consolation Constellation: </em></strong><em>Once per Ritual Tier, you may exhaust this item to gain 1 Skillcard of any Skillset for each unique non-Token Monster slain this game.</em></p>
+<p><strong>Loot:</strong> The first time The Hydra is destroyed, the slayer gains the item <strong><em>Nessus&rsquo;s Bane:</em></strong><em> As an action, discard this item to destroy a single Monster in your Section. </em>If the Burning Bolts ability was never utilized, then additionally gain the item <strong><em>Consolation Constellation: </em></strong><em>Once per Ritual Tier, you may exhaust this item to gain 1 Skillcard of any Skillset for each unique non-Token Monster slain this game.</em></p>
 <p><br /><br /></p>
 <p><strong>Warmech </strong>- <em>1/64. Or something like that.</em></p>
 <p>4HP | 1 Dice | 2+</p>
